@@ -8,11 +8,11 @@ $('.m-content').height(Height+"px");
 
 function commentClick(){
     // $('#commentInp').click()
-    $('#commentInp').focus(); 
+    
     // $('#commentInp').click();
     $('.comment-input-div').css('display','block')
-    $('#commentInp').click()
-    $('#commentInp').click()
+    $('#commentInp').focus(); 
+  
 
 }
 
