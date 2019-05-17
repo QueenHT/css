@@ -5,7 +5,8 @@ var Height=dHeight-xheader-xfooter-2;
 $('.m-content').height(Height+"px");
 alert($(window).height())
 function commentClick(){
-    $('#commentInp').click()
+    // $('#commentInp').click()
+    $('#commentInp').trigger("click").focus();
     alert($(window).height())
    
 }
