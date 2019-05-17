@@ -11,4 +11,8 @@ function commentClick(){
     $('#commentInp').focus(); 
     // $('#commentInp').click();
     $('.comment-input-div').css('display','block')
+    $('#commentInp').click()
+    $('#commentInp').click()
+
 }
+
