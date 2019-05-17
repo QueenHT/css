@@ -183,6 +183,7 @@
     bottom: .2rem;
     text-align: center;
     background: #fafafa;
+    display: none;
 }
 .comment-input-div input{
     width: 95%;
