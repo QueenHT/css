@@ -6,7 +6,6 @@ $('.m-content').height(Height+"px");
 alert($(window).height())
 function commentClick(){
     $('#commentInp').click()
-    alert('window',$(window).height())
+    alert($(window).height())
    
-    $('.comment-input-div').css('display',none)
 }
