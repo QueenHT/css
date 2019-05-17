@@ -3,28 +3,47 @@ var xheader=$('.header_wrap').height();
 var xfooter=$('.m-footer').height();
 var Height=dHeight-xheader-xfooter-2;
 $('.m-content').height(Height+"px");
-<<<<<<< HEAD
 alert($(window).height())
+var $inputs = document.getElementById('commentInp')
+for(var i =0; i < $inputs.length; i++) 
+{  
+    listenKeybord($inputs[i]);
+}
 function commentClick(){
-    $('#commentInp').click()
+    $('#commentInp').focus();
     alert('window',$(window).height())
    
-    $('.comment-input-div').css('display',none)
+ 
 }
-=======
-// alert($(window).height())
-// $("input").trigger("click").focus();
+if (checkSystem()) {
+     
+// IOS 键盘弹起：IOS 和 Android 输入框获取焦点键盘弹起
 
-function commentClick(){
-    
-    $('.comment-input-div').css('display','block')
-    $("#commentInp").trigger("click").focus();
-    // $('#commentInp').focus(); 
-  
+$input.addEventListener('focus', function(){
+      alert('IOS 键盘弹起啦！');      
+// IOS 键盘弹起后操作    
+},false)    
+// IOS 键盘收起：IOS 点击输入框以外区域或点击收起按钮，输入框都会失去焦点，键盘会收起，
+    $input.addEventListener('blur', () => {
+             alert('IOS 键盘收起啦！');      
+// IOS 键盘收起后操作    
+})
+}else{
 
+     var originHeight=document.documentElement.clientHeight||document.body.clientHeight;  
+    window.addEventListener('resize',function(){ 
+    var  resizeHeight  = document.documentElement.clientHeight||document.body.clientHeight; 
+   if(originHeight<resizeHeight) 
+   {  
+          alert('Android 键盘收起啦！');
+   // Android 键盘收起后操作         
+   }else{
+   
+           alert('Android 键盘弹起啦！' );  
+           
+   // Android 键盘弹起后操作  
+         
+   }    
+    originHeight= resizeHeight;        
+   },false)
 }
-
-document.getElementById("commentInp").addEventListener("focus", function(){
-            alert('获取焦点')
-});
->>>>>>> e1c93c1a4c3214d9a1be5b4ef400aaa4c3f3c1db
