@@ -16,3 +16,6 @@ function commentClick(){
 
 }
 
+document.getElementById("commentInp").addEventListener("focus", function(){
+            alert('获取焦点')
+});
