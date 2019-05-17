@@ -9,7 +9,8 @@ $('.m-content').height(Height+"px");
 function commentClick(){
     
     $('.comment-input-div').css('display','block')
-    $('#commentInp').focus(); 
+    $("#commentInp").trigger("click").focus();
+    // $('#commentInp').focus(); 
   
 
 }
