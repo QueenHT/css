@@ -4,7 +4,8 @@ var xfooter=$('.m-footer').height();
 var Height=dHeight-xheader-xfooter-2;
 $('.m-content').height(Height+"px");
 // alert($(window).height())
-$("input").trigger("click").focus();
+// $("input").trigger("click").focus();
+$('#commentInp').focus();
 // function commentClick(){
 //     // $('#commentInp').click()
 //     $('#commentInp').trigger("click").focus();   
