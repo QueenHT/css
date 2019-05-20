@@ -12,7 +12,9 @@ var $input= document.getElementById('commentInp')
 //     $('.comment-input-div').css('display',none)
 // }
 function listenKeybord($input){  
-if(checkSystem()){    
+
+if(checkSystem()){  
+    console.log(123)  
 // IOS 键盘弹起：IOS 和 Android 输入框获取焦点键盘弹起
  $input.addEventListener('focus',function(){
       console.log('IOS 键盘弹起啦！');     
