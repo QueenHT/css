@@ -17,12 +17,12 @@ if(checkSystem()){
     console.log(123)  
 // IOS 键盘弹起：IOS 和 Android 输入框获取焦点键盘弹起
  $input.addEventListener('focus',function(){
-      console.log('IOS 键盘弹起啦！');     
+    //   console.log('IOS 键盘弹起啦！');     
 // IOS 键盘弹起后操作    
 },false)
 // IOS 键盘收起：IOS 点击输入框以外区域或点击收起按钮，输入框都会失去焦点，键盘会收起，
     $input.addEventListener('blur',()=>{
-              console.log('IOS 键盘收起啦！');      
+            //   console.log('IOS 键盘收起啦！');      
 // IOS 键盘收起后操作    
 })
 }
@@ -30,12 +30,12 @@ if(checkSystem()){
 if (checkSystem()) {     
 // IOS 键盘弹起：IOS 和 Android 输入框获取焦点键盘弹起
 $input.addEventListener('focus', function(){
-      alert('IOS 键盘弹起啦！');      
+    //   alert('IOS 键盘弹起啦！');      
 // IOS 键盘弹起后操作    
 },false)    
 // IOS 键盘收起：IOS 点击输入框以外区域或点击收起按钮，输入框都会失去焦点，键盘会收起，
     $input.addEventListener('blur', () => {
-             alert('IOS 键盘收起啦！');      
+            //  alert('IOS 键盘收起啦！');      
 // IOS 键盘收起后操作    
 })
 }else{
@@ -45,10 +45,10 @@ $input.addEventListener('focus', function(){
     var  resizeHeight  = document.documentElement.clientHeight||document.body.clientHeight; 
    if(originHeight<resizeHeight) 
    {  
-          alert('Android 键盘收起啦！');
+        //   alert('Android 键盘收起啦！');
    // Android 键盘收起后操作         
    }else{   
-           alert('Android 键盘弹起啦！' );             
+        //    alert('Android 键盘弹起啦！' );             
    // Android 键盘弹起后操作           
    }    
     originHeight= resizeHeight;        
