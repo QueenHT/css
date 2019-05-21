@@ -13,7 +13,7 @@ function commentClick(){
 }
 $('#commentBtn').click(function(){
     $('.comment-input-div').css('display','none')
-    $('.m-footer').css('display','block')
+    $('.m-footer').css('display','flex')
 })
 // function listenKeybord($input){  
 
