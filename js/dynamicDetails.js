@@ -6,11 +6,15 @@ $('.m-content').height(Height+"px");
 // alert($(window).height())
 var $input= document.getElementById('commentInp')
 //     listenKeybord($input);
-// // function commentClick(){
-// //     $('#commentInp').focus();
-// //     alert('window',$(window).height())   
-// //     $('.comment-input-div').css('display',none)
-// // }
+function commentClick(){
+    $('#commentInp').focus();
+    $('.m-footer').css('display','none')
+    $('.comment-input-div').css('display','block')    
+}
+$('#commentBtn').click(function(){
+    $('.comment-input-div').css('display','none')
+    $('.m-footer').css('display','block')
+})
 // function listenKeybord($input){  
 
 // if(checkSystem()){  

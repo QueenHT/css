@@ -96,11 +96,11 @@
 .m-footer{
     width:100%;
     background: #fff;
-    display: flex;
-    justify-content:flex-start;
     position:fixed;  
     bottom: 0rem;   
-    display: none;
+    display: block;
+    display: flex;
+    justify-content:flex-start;
 }
 .m-footer>div{
     width: 20%;
@@ -177,6 +177,7 @@
     flex-wrap: wrap;
 }
 .comment-input-div{
+    display: none;
     width: 100%;
     height: 1.2rem;
     line-height: 1.2rem;
