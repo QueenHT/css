@@ -98,7 +98,6 @@
     background: #fff;
     position:fixed;  
     bottom: 0rem;   
-    display: block;
     display: flex;
     justify-content:flex-start;
 }
