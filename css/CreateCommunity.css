@@ -1,0 +1,105 @@
+.body{
+    width: 90%;
+    margin: 0 auto;
+}
+.g-top{
+    width: 100%;
+}
+.g-top>div{
+    width: 100%;
+    height: 1.2rem;
+    line-height: 1.2rem;
+}
+.m-input input{
+    width: 98%;
+    margin: 0 auto;
+    border: 1.5px solid #e9e9ea;
+    height: .8rem;
+    line-height: .8rem;
+    outline: none;
+    padding-left: .2rem;
+
+}
+.m-select{
+    margin-top: .4rem;
+}
+.select-div{
+    width: 98%;
+    margin: 0 auto;
+    height: .81rem;
+    line-height: .81rem;
+    background: #eff1f5;
+    font-size: .4rem;
+    display: flex;
+    justify-content: space-between;  
+    border: 1.5px solid #eff1f5;  
+    padding-left:.2rem;
+    }
+    .select-inp{
+        width:95%;
+    }
+    .select-inp input{
+        height: .81rem;
+        line-height: .81rem;
+        background: #eff1f5;
+        font-size: .4rem;
+        border: none;
+        width: 100%;
+    }
+   
+.g-img{
+    margin-top:.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+.fujian {
+    background: #d7d7d7;
+    width: 4rem;
+    height: 4rem;   
+    color: #000;
+    text-align: center;
+    display: inline-block;
+    margin:  .1rem  .2rem;
+  }
+
+  .xian1 {
+    border-top: 1px solid #cccccc;
+    transform: scaleY(0.5);
+  }
+  .Communityicon-img{
+      width: 100%;
+      height: 100%;
+  }
+  .g-footer{
+    position: fixed;
+    bottom: .8rem;
+    width: 100%;
+        text-align: center;
+  }
+  .g-footer div{
+      width:95%;
+      margin: 0 auto;
+      font-size: .45rem;
+  }
+  .m-footer-btn{
+      width: 100%;
+      height: 1.2rem;
+      line-height: 1.2rem;
+      border-radius: .5rem;
+      background: #00cfe3;
+      color: #fff;
+  }
+  
+  input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+    color: #bfbfbf; 
+    } 
+    input:-moz-placeholder, textarea:-moz-placeholder { 
+    color: #bfbfbf; 
+    } 
+    input::-moz-placeholder, textarea::-moz-placeholder { 
+    color: #bfbfbf; 
+    } 
+    input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+    color: #bfbfbf; 
+    } 
+    

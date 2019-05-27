@@ -1,0 +1,77 @@
+input:focus { outline: none; }
+a{
+    text-decoration: none;
+}
+html{
+    height: 100%;
+    background: #f5f5f5;
+}
+.part{
+    width: 100%;
+    height: 1.4rem;
+    border-bottom: 1.2px solid #e4e6e7;
+}
+.part-qian{
+    display: inline-block;
+    width: 1rem;
+    text-align: center;
+    line-height: 1.4rem;
+    font-size: .38rem;
+    margin-left: 0.8rem;
+    margin-right: .55rem;
+}
+.part-hou{
+    outline: none;
+    width: 4rem;
+    font-size: .38rem;
+    border: 0px;
+}
+.part-city{
+    display: inline-block;
+    font-size: .38rem;
+}
+.weui-picker-modal{
+    height: 9rem;
+}
+.toolbar .toolbar-inner{
+    height: 1.2rem;
+}
+.toolbar .picker-button{
+    height: 1.2rem;
+    line-height: 1.2rem;
+}
+.toolbar, .toolbar .title {
+    font-size: .5rem;
+    color: #3d4145;
+    width: 100%;
+}
+.toolbar .title{
+    line-height:1.2rem;
+}
+.weui-picker-modal .picker-items{
+    font-size: .5rem;
+}
+.picker-button-other{
+    height: 1.2rem;
+    line-height: 1.2rem;
+    position: absolute;
+    light: 0;
+    color: black;
+    padding: 0 .5rem;
+}
+.weui-picker-modal .picker-item.picker-selected{
+    font-weight: 600;
+}
+.weui-toast{
+    width: 4rem;
+}
+.weui-picker-modal .picker-center-highlight {
+     height: 0px;
+     box-sizing: border-box;
+     position: absolute;
+     left: 0;
+     width: 0%;
+     top: 0%;
+     margin-top: 0px;
+     pointer-events: none;
+}

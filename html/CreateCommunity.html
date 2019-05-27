@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../css/pageHeader.css">
+    <link rel="stylesheet" href="../css/CreateCommunity.css" />
+    <link rel="stylesheet" href="../css/iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/jqweui.css">
+    <link rel="stylesheet" href="../css/weui.css">
+    <link rel="stylesheet" href="../css/addAddress.css">
+    <script src="../js/pub/jquery_3.2.1.min.js"></script>
+    <script src="../js/pub/crypto_js.js"></script>
+    <script src="../js/pub/qianming.js"></script>
+    <script src="../js/pub/publicJS.js"></script>
+    <script type="text/javascript" src="../js/pub/rem.js"></script>
+    <title>创建社区</title>
+</head>
+
+<body style="background: #fff;">
+    <div class="mycommunity">
+        <header>
+            <div class="header_wrap">
+                <div class="header header_bg">
+                    <div class="header_back" onclick="back()">
+                        <div class="back_btn">
+                            <i class="iconfont icon-fenxiang"></i>
+                        </div>
+                    </div>
+                    <div class="header_name">
+                        <span>创建社区</span>
+                    </div>
+                    <div class="header_manage">
+                        <a href="" id="all_href">
+                            <div class="next_pagebtn">
+                                <!-- <span style="color:black">所有社区</span> -->
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="header_bottom"></div>
+            </div>
+        </header>
+        <div class="body">
+          <div class="g-top"> 
+              <div class="m-input"><input type="text" placeholder="社区名称"></div>
+              <div class="m-select">
+                 <div class="select-div" >
+                     <div class="select-inp">
+                         <input type="text" id='picker' placeholder="类型">
+                     </div>
+                     <div style="margin-right:.2rem;">
+                            <i class="iconfont icon-linecar105"></i>
+                     </div>
+                 </div>
+                 
+               </div>
+          </div>
+          <div class="g-img">
+                <div class="fujian" id="Communityicon" onclick="clickMenu1()" style="color: #000;">
+                        <div style="width:1.6rem;height:1.6rem;line-height:1.6rem;margin:0 auto;margin-top:1rem;text-align:center;">
+                                <i class="iconfont icon-shangchuantupian"></i>
+                        </div>
+                        <div style="width:100%;height:.6rem;text-align:center;font-size:.35rem;font-weight: 600">社区图标</div>
+                    </div>
+                    <div class="fujian" id="Backgroundicon" onclick="clickMenu2()" style="color: #000;">
+                            <div style="width:1.6rem;height:1.6rem;line-height:1.6rem;margin:0 auto;margin-top:1rem;text-align:center;">
+                                    <i class="iconfont icon-shangchuantupian"></i>
+                            </div>
+                            <div style="width:100%;height:.6rem;text-align:center;font-size:.35rem;font-weight: 600">背景图片</div>
+                        </div>
+                <div  style="display: none;">
+                        <input name="evidence" id="upload_file" onchange="uploadImg(this,'Communityicon')" type="file"/>
+                </div>
+                <div  style="display: none;">
+                        <input name="evidence" id="upload_file2" onchange="uploadImg(this,'Backgroundicon')" type="file"/>
+                </div>
+                       
+     
+        </div>
+      
+     
+    </div>
+    <div class="g-footer">
+            <div>
+                <div class="m-footer-btn">
+                    创建社区
+                </div>
+            </div>
+        </div>
+    <a href="" id="href_true"></a>
+</body>
+<script src="../js/pub/jquery_weui.js"></script>
+<script type="text/javascript" src="../js/CreateCommunity.js"></script>
+
+</html>
