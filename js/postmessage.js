@@ -160,7 +160,7 @@ function fileChange(el) {
           if (navigator.userAgent.match(/iphone/i)) { 
               //如果方向角不为1，都需要进行旋转 added by lzk 
               if(Orientation != "" && Orientation != 1){ 
-                  alert('旋转处理123'); 
+                  alert('旋转处理456'); 
                   switch(Orientation){ 
                       case 6://需要顺时针（向左）90度旋转 
                           alert('需要顺时针（向左）90度旋转'); 
@@ -183,19 +183,20 @@ function fileChange(el) {
           file.src =base64 ;
           console.log(file)
           console.log('1',file.src)
+          if (imgList.length >= 6) {
+          } else {
+            // 设置定时 拿到src的值再进行push和渲染
+     
+            imgList.push({
+              file
+            });
+            imghtml()
+          
+          }
         }
           
         console.log('file',file)
-        if (imgList.length >= 6) {
-        } else {
-          // 设置定时 拿到src的值再进行push和渲染
-        setTimeout(function(){
-          imgList.push({
-            file
-          });
-          imghtml()
-        },2000)
-        }
+        
       };     
     }
   }
