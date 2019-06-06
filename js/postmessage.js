@@ -133,14 +133,13 @@ function fileChange(el) {
      }); 
       let reader = new FileReader();
       reader.vue = this;
-      reader.readAsDataURL(file);
-    
-      reader.onload = function() {
-     
+      reader.readAsDataURL(file);    
+      reader.onload = function() {     
         var image = new Image();
-        file.src =this.result;
         image.src =this.result;  
+        var base64=null;
         image.onload = function() { 
+          console.log('image.onload')
           var expectWidth = this.naturalWidth; 
           var expectHeight = this.naturalHeight; 
            
@@ -182,16 +181,20 @@ function fileChange(el) {
           }
           console.log(base64)
           file.src =base64 ;
-          console.log(file.src)
+          console.log(file)
+          console.log('1',file.src)
         }
           
         console.log('file',file)
         if (imgList.length >= 6) {
         } else {
-        imgList.push({
+          // 设置定时 拿到src的值再进行push和渲染
+        setTimeout(function(){
+          imgList.push({
             file
           });
           imghtml()
+        },500)
         }
       };     
     }
