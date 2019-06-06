@@ -415,3 +415,7 @@ function delFavorite(){
     }
 });
 }
+// 软键盘收起
+$("input").on("blur",function(){
+	window.scroll(0,0);//失焦后强制让页面归位
+});

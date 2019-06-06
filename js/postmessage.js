@@ -1,3 +1,4 @@
+
 var name=localStorage.getItem('communityname')
 var nameid=localStorage.getItem('communityId')
 var size=0;
@@ -122,12 +123,69 @@ function fileChange(el) {
     if (file.type.indexOf("image") == -1) {
       return;
     } else {
-       
+      EXIF.getData(file, function() { 
+        // alert(EXIF.pretty(this)); 
+        console.log('file.',file)
+         EXIF.getAllTags(this);  
+         //alert(EXIF.getTag(this, 'Orientation'));  
+         Orientation = EXIF.getTag(this, 'Orientation'); 
+         //return; 
+     }); 
       let reader = new FileReader();
       reader.vue = this;
       reader.readAsDataURL(file);
+    
       reader.onload = function() {
-        file.src = this.result;
+     
+        var image = new Image();
+        file.src =this.result;
+        image.src =this.result;  
+        image.onload = function() { 
+          var expectWidth = this.naturalWidth; 
+          var expectHeight = this.naturalHeight; 
+           
+          if (this.naturalWidth > this.naturalHeight && this.naturalWidth > 800) { 
+              expectWidth = 800; 
+              expectHeight = expectWidth * this.naturalHeight / this.naturalWidth; 
+          } else if (this.naturalHeight > this.naturalWidth && this.naturalHeight > 1200) { 
+              expectHeight = 1200; 
+              expectWidth = expectHeight * this.naturalWidth / this.naturalHeight; 
+          } 
+          var canvas = document.createElement("canvas"); 
+          var ctx = canvas.getContext("2d"); 
+          canvas.width = expectWidth; 
+          canvas.height = expectHeight; 
+          ctx.drawImage(this, 0, 0, expectWidth, expectHeight); 
+          var base64 = null;           
+          //修复ios 
+          if (navigator.userAgent.match(/iphone/i)) { 
+              //如果方向角不为1，都需要进行旋转 added by lzk 
+              if(Orientation != "" && Orientation != 1){ 
+                  alert('旋转处理'); 
+                  switch(Orientation){ 
+                      case 6://需要顺时针（向左）90度旋转 
+                          alert('需要顺时针（向左）90度旋转'); 
+                          rotateImg(this,'left',canvas); 
+                          break; 
+                      case 8://需要逆时针（向右）90度旋转 
+                          alert('需要顺时针（向右）90度旋转'); 
+                          rotateImg(this,'right',canvas); 
+                          break; 
+                      case 3://需要180度旋转 
+                          alert('需要180度旋转'); 
+                          rotateImg(this,'right',canvas);//转两次 
+                          rotateImg(this,'right',canvas); 
+                          break; 
+                  }        
+              } 
+              base64 = canvas.toDataURL("image/jpeg", 0.8); 
+          }
+          console.log(base64)
+          file.src =base64 ;
+          console.log(file.src)
+        }
+          
+        console.log('file',file)
         if (imgList.length >= 6) {
         } else {
         imgList.push({
@@ -144,13 +202,16 @@ function fileChange(el) {
     });
   }
  function fileDel(index) {
-    size = size - imgList[index].file.size; //总大小
+    // size = size - imgList[index].file.size; //总大小
     imgList.splice(index, 1);  
     imghtml()
   }
-function imghtml(){    
+function imghtml(){   
+ 
     form.imgstr='';
     for(var i=0;i<imgList.length;i++){
+
+      console.log(imgList[i].file) 
       form.imgstr+= `
          <div class="img-upload">
          <div class="img-show"  style="background-image: url(`+imgList[i].file.src+`)">
@@ -353,3 +414,7 @@ function labelhtml(label){
   })
  }
 }
+// 软键盘收起
+$("input").on("blur",function(){
+	window.scroll(0,0);//失焦后强制让页面归位
+});

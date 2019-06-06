@@ -129,7 +129,8 @@ function fileChange(el) {
     imgList.splice(index, 1);  
     imghtml()
   }
-function imghtml(){   
+function imghtml(){  
+  console.log(imgList) 
   
     var htmlstr='';
     for(var i=0;i<imgList.length;i++){
@@ -350,10 +351,11 @@ function jointLabel(){
   });
   from.subTitle=(from.subTitle.substring(from.subTitle.length-1)==',')?from.subTitle.substring(0,from.subTitle.length-1):from.subTitle;
 }
-// 处理图片url
+// 软键盘收起
 $("input").on("blur",function(){
 	window.scroll(0,0);//失焦后强制让页面归位
 });
+// picker时不调起软键盘
 $('#picker').click(function () {
   document.activeElement.blur();
 })

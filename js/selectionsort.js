@@ -144,11 +144,22 @@ function searchCommunity(searchName){
         }
     });  
   }
-function backpost(name,id){
-    localStorage.setItem('communityname',name);
-    localStorage.setItem('communityId',id);
-    window.history.go(-1)
+// function backpost(name,id){
+//     localStorage.setItem('communityname',name);
+//     localStorage.setItem('communityId',id);
+//     window.history.go(-1)
+//   }
+  function backpost(){
+    if (checkSystem()) {
+        window.location.href =`./postmessage.html?openId=${openId}&masterSecret=${masterSecret}`
+    } else {
+        data_href(`./postmessage.html?openId=${openId}&masterSecret=${masterSecret}`)
+ }
   }
   function back(){
-    window.history.go(-1)
+    if (checkSystem()) {
+        window.location.href =`./postmessage.html?openId=${openId}&masterSecret=${masterSecret}`
+    } else {
+        data_href(`./postmessage.html?openId=${openId}&masterSecret=${masterSecret}`)
+ }
   }

@@ -187,3 +187,7 @@ function back(){
      window.history.go(-1)  
     }
 }
+// picker时不调起软键盘
+$('#picker').click(function () {
+    document.activeElement.blur();
+  })
