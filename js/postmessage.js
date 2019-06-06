@@ -316,8 +316,8 @@ return{
     isAndroid:isAndroid 
 }}();
 // 监听输入框的软键盘弹起和收起事件
-function listenKeybord($input) 
-{  
+function listenKeybord($input){  
+
 if(judgeDeviceType.isIOS) 
   {  
   // IOS 键盘弹起：IOS 和 Android 输入框获取焦点键盘弹起
@@ -336,6 +336,7 @@ $("input").on("blur",function(){
 // Andriod 键盘收起：Andriod 键盘弹起或收起页面高度会发生变化，以此为依据获知键盘收起
 if(judgeDeviceType.isAndroid) 
 {    
+ 
 var originHeight = document.documentElement.clientHeight || document.body.clientHeight;
     window.addEventListener('resize',function(){ 
 var resizeHeight = document.documentElement.clientHeight|| document.body.clientHeight;    
@@ -351,5 +352,7 @@ activeElementScrollIntoView($input,1000);
 }
 }
 
-var $inputs = document.querySelectorAll('.input');for(var i =0;i < $inputs.length; i++) {
-  listenKeybord($inputs[i]);}
+var $inputs = document.querySelectorAll('input');
+for(var i =0;i < $inputs.length; i++) {
+  listenKeybord($inputs[i]);
+}
