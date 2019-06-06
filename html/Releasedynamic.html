@@ -18,6 +18,8 @@
     <script src="../js/pub/qianming.js"></script>
     <script src="../js/pub/publicJS.js"></script>
     <script src="../js/pub/jquery-from.js"></script>
+    <script src="../js/Imagerotation/exif.js"></script>
+    <script src="../js/Imagerotation/index.js"></script>
  
 </head>
 
@@ -102,8 +104,8 @@
 
     </div>
     <form  id="picform" method="post" name="f_upload" enctype="multipart/form-data">
-        <input  type="file" name="file" id="upload_file" accept="image/*"  onchange="fileChange(event)"
-            style="display: none" multiple>
+        <input  type="file" name="file" id="upload_file" accept="image/*"onchange="selectFileImage(this)"
+            style="display: none" >
         <br>
         <!--<input type="file" name="upload" id="upload_file2" accept='image/*' capture="camera" @change="fileChange($event)" style="display: none"><br>-->
         <!-- <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe> -->

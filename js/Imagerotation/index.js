@@ -1,10 +1,8 @@
 // imgList=[];
 function selectFileImage(fileObj,el) { 
-    console.log(123)
     var file = fileObj.files['0']; 
     //图片方向角 added by lzk     
     if (file) { 
-        console.log("正在上传,请稍后..."); 
         var rFilter = /^(image\/jpeg|image\/png)$/i; // 检查图片格式 
         if (!rFilter.test(file.type)) { 
             //showMyTips("请选择jpeg、png格式的图片", false); 
@@ -12,9 +10,7 @@ function selectFileImage(fileObj,el) {
         } 
         // var URL = URL || webkitURL; 
         //获取照片方向角属性，用户旋转控制 
-        EXIF.getData(file, function() { 
-           // alert(EXIF.pretty(this)); 
-          
+        EXIF.getData(file, function() {           
             EXIF.getAllTags(this);  
             //alert(EXIF.getTag(this, 'Orientation'));  
             Orientation = EXIF.getTag(this, 'Orientation'); 
@@ -47,22 +43,17 @@ function selectFileImage(fileObj,el) {
                 
                 //修复ios 
                 if (navigator.userAgent.match(/iphone/i)) { 
-                    console.log('iphone'); 
                     //alert(expectWidth + ',' + expectHeight); 
                     //如果方向角不为1，都需要进行旋转 added by lzk 
                     if(Orientation != "" && Orientation != 1){ 
-                        alert('旋转处理'); 
                         switch(Orientation){ 
                             case 6://需要顺时针（向左）90度旋转 
-                                alert('需要顺时针（向左）90度旋转'); 
                                 rotateImg(this,'left',canvas); 
                                 break; 
                             case 8://需要逆时针（向右）90度旋转 
-                                alert('需要顺时针（向右）90度旋转'); 
                                 rotateImg(this,'right',canvas); 
                                 break; 
                             case 3://需要180度旋转 
-                                alert('需要180度旋转'); 
                                 rotateImg(this,'right',canvas);//转两次 
                                 rotateImg(this,'right',canvas); 
                                 break; 
@@ -100,20 +91,12 @@ function selectFileImage(fileObj,el) {
                 //                 rotateImg(this,'right',canvas); 
                 //                 break; 
                 //         }        
-                //     } 
-                     
-                  
-                } 
-                //uploadImage(base64); 
-                // $("#myImage").attr("src", base64); 
+                //     }                     
+                }
                 base64 = canvas.toDataURL("image/jpeg", 0.8); 
-             
-                file.src=base64
-                console.log(file.src)
-                setTimeout(function(){
+                  file.src=base64
                     imgList.push(file)
-                imghtml()
-                },2000)
+                 imghtml()
             }; 
         }; 
         oReader.readAsDataURL(file); 

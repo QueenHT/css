@@ -61,82 +61,16 @@ function longsize(v){
 function clickMenu1() {  
    $("#upload_file").click();
   }
-function fileChange(el) {    
-    if (!el.target.files[0].size) return;
-     fileList(el.target);
-  }
-  function fileList(fileList) {
-    let files = fileList.files;
-
-    for (let i = 0; i < files.length; i++) {
-      //判断是否为文件夹
-      if (files[i].type != "") {
- 
-        fileAdd(files[i]);
-      } else {
-        //文件夹处理
-        folders(fileList.items[i]);
-      }
-    }
-  }
-  function folders(files) {
-    //判断是否为原生file
-    if (files.kind) {
-      files = files.webkitGetAsEntry();
-    }
-    files.createReader().readEntries(function(file) {
-      for (let i = 0; i < file.length; i++) {
-        if (file[i].isFile) {
-         foldersAdd(file[i]);
-        } else {
-      folders(file[i]);
-        }
-      }
-      
-    });
-    
-  }
-  function fileAdd(file) {   
-    //总大小
-    size = this.size + file.size;
-    //判断是否为图片文件
-    if (file.type.indexOf("image") == -1) {
-      return;
-    } else {
-       
-      let reader = new FileReader();
-      reader.vue = this;
-      reader.readAsDataURL(file);
-      reader.onload = function() {
-        file.src = this.result;
-        if (imgList.length >= 6) {
-        } else {
-        imgList.push({
-            file
-          });
-          imghtml()
-        }
-      };     
-    }
-  }
- function  foldersAdd(entry) {
-    entry.file(function(file) {
-    fileAdd(file);
-    });
-  }
  function fileDel(index) {
-    size = size - imgList[index].file.size; //总大小
     imgList.splice(index, 1);  
     imghtml()
   }
 function imghtml(){  
-  console.log(imgList) 
-  
     var htmlstr='';
     for(var i=0;i<imgList.length;i++){
         htmlstr+= `
          <div class="img-upload">
-         <div class="img-show"  style="background-image: url(`+imgList[i].file.src+`)">
+         <div class="img-show"  style="background-image: url(`+imgList[i].src+`)">
             
            <p class="img-close"  >
              <img style="width:.3rem;height:.3rem;"  src="../img/del.png"  onclick="fileDel(`+i+`)" alt>
@@ -301,10 +235,9 @@ function ueryType(){
   });
 }
 function manageimgurl(){
-  console.log(123)
   var formData = new FormData()
              for(var i = 0; i < imgList.length; i++) {           
-                formData.append('file', imgList[i].file);
+                formData.append('file', imgList[i]);
            }
   $.ajax({
     //提交数据的类型 POST GET
