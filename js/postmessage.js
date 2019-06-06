@@ -343,7 +343,7 @@ if(originHeight < resizeHeight) {
 // Android 键盘收起后操作      
 }else{
 // Android 键盘弹起后操作 
-console.log('弹起')
+alert('弹起')
 activeElementScrollIntoView($input,1000); 
 }
  originHeight = resizeHeight;    
