@@ -179,7 +179,9 @@ function fileChange(el) {
               } 
              
           }
+     
           base64 = canvas.toDataURL("image/jpeg", 0.8); 
+          alert(base64)
           file.src =base64 ;
           console.log(file)
           console.log('1',file.src)
@@ -187,10 +189,12 @@ function fileChange(el) {
           } else {
             // 设置定时 拿到src的值再进行push和渲染
      
+          setTimeout(function(){
             imgList.push({
               file
             });
             imghtml()
+          })
           
           }
         }
