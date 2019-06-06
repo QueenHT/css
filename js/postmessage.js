@@ -177,9 +177,9 @@ function fileChange(el) {
                           break; 
                   }        
               } 
-              base64 = canvas.toDataURL("image/jpeg", 0.8); 
+             
           }
-          console.log(base64)
+          base64 = canvas.toDataURL("image/jpeg", 0.8); 
           file.src =base64 ;
           console.log(file)
           console.log('1',file.src)
