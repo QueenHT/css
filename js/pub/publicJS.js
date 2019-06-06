@@ -14,7 +14,7 @@ function checkSystem(){
 }
 // Toast弹框
 function Toast(msg) {
-    var duration = 1000;
+    var duration = 1500;
     var m = document.createElement('div');
     m.innerHTML = msg;
     m.style.cssText = "width: 60%;min-width: 150px;opacity: 0.7;height: 30px;color: rgb(255, 255, 255);line-height: 30px;text-align: center;border-radius: 5px;position: fixed;top: 40%;left: 20%;z-index: 999999;background: rgb(0, 0, 0);font-size: 12px;";
@@ -54,4 +54,21 @@ function data_href(url) {
        return value 
     }
   }
-   
+  // 与原生交互的返回按钮
+  function goBackfn(){
+    if (checkSystem()) {
+      window.webkit.messageHandlers.haiyiJSCallNativeHandler.postMessage({
+          "action": "back"
+      }); 
+  } else {
+      window.android.haiyiJSCallNativeHandler('back', '')  
+  }
+  }
+  //  需要指定路径时h5的返回按钮
+  function h5backurl(url){
+    if (checkSystem()) {
+      window.location.href = `./${url}.html?openId=${openId}&masterSecret=${masterSecret}`
+    } else {
+      data_href(`./${url}?openId=${openId}&masterSecret=${masterSecret}`)
+    }
+  }

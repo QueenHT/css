@@ -16,58 +16,32 @@
     <script src="../js/pub/qianming.js"></script>
     <script src="../js/pub/publicJS.js"></script>
     <script src="../js/touchJs/touchTouch.jquery.js"></script>
-    <title>社区详情</title>
+    <title>我的发帖</title>
 </head>
 
 <body>
     <div class="container">
-        <header class="community_header" id="comHeader">
-            <div class="header_wrap">
-                <div class="header header_bg" style="background: none">
-                    <div class="header_back" onclick="back()">
+        <div class="header_wrap" style=" border-bottom: 1px solid #c0c0c0;">
+            <div class="header">
+              
+                <div class="header_back" onclick=" getBackHref()">
+                  
                         <div class="back_btn">
-                            <span class="iconfont icon-fenxiang"></span>
+                            <i class="iconfont icon-fenxiang"></i>
                         </div>
-                    </div>
-                    <div class="header_name">
-                        <span></span>
-                    </div>
-                    
-                    <div class="header_manage">
-                        <a href="" id="found_href">
-                            <div class="next_pagebtn">
-                                <span class="iconfont icon-sousuo"></span>
-                            </div>
-                        </a>
-                    </div>
+                
+                </div>
+             
+                <div class="header_name">
+                    <span>我的发帖</span>
+                </div>
+                <div class="header_manage" onclick="handleMyCommunity()">
+                    <!-- <div class="next_pagebtn">
+                        <span>发帖</span>
+                    </div> -->
                 </div>
             </div>
-            <div class="commnuity_Info">
-                <div class="community_headwrap">
-                    <div class="community_headimg">
-                        <img id="communityImg" src="../img/demoimg/mm.jpg"  onerror="this.src='../img/dbm_images/logo.png'" alt="">
-                    </div>
-                </div>
-                <div class="community_namewrap">
-                    <div class="community_box">
-                        <div class="community_name" id="communityName">
-                            Art艺术社区
-                        </div>
-                        <div class="comunity_usercount">
-                            <span id="communityUserCount">9012</span>人
-                        </div>
-                    </div>
-
-                </div>
-                <div class="community_btnwrap">
-                    <div class="btn_box" id="jionCommunity">
-                        <span class="iconfont icon-jia"></span>加入
-                    </div>
-                </div>
-            </div>
-            
-        </header>
-        <div class="split_line"></div>
+        </div>
         <article id="community_art">
             <div class="community_main">
                 <div class="weui-pull-to-refresh__layer">
@@ -94,6 +68,5 @@
     </div>
 </body>
     <script type="text/javascript" src="../js/pub/jquery_weui.js"></script>
-    <script type="text/javascript" src="../js/communityInfo.js"></script>
-
+    <script type="text/javascript" src="../js/PostList.js"></script>
 </html>

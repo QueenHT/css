@@ -4,13 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>Document</title>
+    <title>转发动态</title>
     <link rel="stylesheet" href="../css/pageHeader.css">
     <link rel="stylesheet" href="../css/iconfont/iconfont.css">
     <link rel="stylesheet" href="../css/jqweui.css">
-    <link rel="stylesheet" href="../css/weui.css">
-
-    <link rel="stylesheet" href="../css/postmessage.css">
+    <link rel="stylesheet" href="../css/ForwardDynamic.css">
     <script src="../js/pub/crypto_js.js"></script>
     <script src="../js/pub/jquery_3.2.1.min.js"></script>
     <script src="../js/pub/jquery_weui.js"></script>
@@ -18,23 +16,22 @@
     <script src="../js/pub/qianming.js"></script>
     <script src="../js/pub/publicJS.js"></script>
 
-    <title>社区发帖</title>
 </head>
 
 <body>
     <div class="header_wrap">
         <div class="header">
 
-            <div class="header_back" onclick="back()">
-                    <div class="back_btn">
+            <div class="header_back">
+                    <div class="back_btn" onclick="back()">
                         <i class="iconfont icon-fenxiang"></i>
                     </div>
             </div>
 
             <div class="header_name">
-                <span>申请加入社区</span>
+                <span>转发动态</span>
             </div>
-            <div class="header_manage">
+            <div class="header_manage" onclick="handleMyCommunity()">
                 <div class="next_pagebtn">
                     <!-- <span>发帖</span> -->
                 </div>
@@ -43,34 +40,44 @@
         <div class="header_bottom"></div>
     </div>
    <div class="m-content">
-    <div class="g-header-fl">
-        <div class="fl-tex">
-            社区名称:
-        </div>
-        <div class="fl-tz-div" >
-            <div class="fl-tz-tex">油画社区</div>
-           
-        </div>
-    </div>
-    <div class="header_bottom"></div>
-
-
-    <div class="m-body">
-        <textarea id="textArea" maxlength="1000" oninput="longsize(value)"
+    <div class="m-body" >
+        <textarea id="textArea"  maxlength="1000" oninput="longsize(value)"
             onfocus="document.getElementById('introTxt').style.display='none'" onblur="textareablur(value)">
         </textarea>
-        <div id="introTxt" class="abnormal" onclick="focusTextarea()">写下你想写的.....</div>
+        <div id="introTxt" class="abnormal" onclick="focusTextarea()">说点什么.....</div>
         <span id="g-long-text">
             最多1000字
         </span>
     </div>
-    <div class="m-button-div-join">
-        <div class="g-button blackBtn">提交</div>
+    <div class="dynamicContent">
+      
+    <div class="m-con-header">
+        <div class="g-tx">
+                <img src="../img/demoimg/mm.jpg" onerror="this.src='../img/dbm_images/logo.png'" alt="">
+        </div>
+        <div class="g-name-div">
+            <div class="g-name">
+                
+            </div>
+            <div class="g-time">
+               
+            </div>
+        </div>
+       
+    </div>   
+    <div class="content">
+      
+    </div>
+    <div class="g-img">
+        <img src="" alt="">
+    </div>    
+    </div>
+    <div class="m-button-div" onclick="forward()">
+        <div class="g-button">转发</div>
     </div>
    </div>
     <a id="href_true" style="display: none;"></a>
 </body>
-<script src="../js/joincommunity.js"></script>
-<script src="../js/pub/jquery_weui.js"></script>
+<script src="../js/ForwardDynamic.js"></script>
 
 </html>

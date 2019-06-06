@@ -1,8 +1,21 @@
 .g-body{
     overflow: hidden;
-    width: 92%;
+    width: 90%;
     margin: 0 auto;
     font-size: .4rem;
+
+}
+#community_art{
+    width: 95%;
+    margin: 0 auto;
+    font-size: .4rem;
+}
+.g-name{
+    height: .5rem;
+    line-height: .5rem;
+}
+.community_body > div:not(:first-child){
+    margin-top: 0rem !important;
 }
 #mineCommunity{
     width: 100%;
@@ -17,6 +30,7 @@
     padding-bottom: .1rem;
     align-items: center;
     border-bottom: 1.3px solid #cfcfcf;
+    font-size: .4rem;
 }
 .g-left{
     width:15%;

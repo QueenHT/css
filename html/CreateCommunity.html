@@ -115,8 +115,11 @@ var Backgroundicon='';
 var newsTitle='';
   // 社区名称
 var type=0;
+// 剪裁图片时的比例
+var cutWidth=1;
+var cutHeight=1;
 // 社区类型
-    $(function() {
+    $(function() {                         
         function toFixed2(num) {
             return parseFloat(+num.toFixed(2));
         }
@@ -147,7 +150,7 @@ var type=0;
             $("#showEdit").fadeIn();
             var $image = $('#report > img');
             $image.cropper({
-                aspectRatio: 1 / 1,
+                aspectRatio: cutWidth /cutHeight,
                 autoCropArea: 0.7,
                 strict: true,
                 guides: false,

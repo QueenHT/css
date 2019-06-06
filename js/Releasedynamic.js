@@ -1,15 +1,8 @@
 // 获取option类型
 ueryType()
 setHeight();
-function setHeight(){
-  var dHeight =$(window).height();
-  var xheader=$('.header_wrap').height();
-  var Height=dHeight-xheader-2;
-  $('.m-content').height(Height+'px')
-  }
-$('#post_href').attr('href',getBackHref())
 var size=0;
-var from=new Object();
+var form=new Object();
 var from={
   newsTitle:"",
   // 帖子标题
@@ -24,29 +17,27 @@ var from={
   icon:""
   // 图片
   };
+function setHeight(){
+  // 使用go(-1)时会有数据缓存清除数据 
+  $('#textArea').val('');
+    imgList=[];
+    $('input').val('')
+  var dHeight =$(window).height();
+  var xheader=$('.header_wrap').height();
+  var Height=dHeight-xheader;
+  $('.m-content').height(Height+'px')
+  }
+
 var imgList=[];
 var imgstr = "";
 var typelist=[];
 // 社区热门类型列表
 var typevalue='';
 // 选中的社区热门类型
-var icon;
+var icon=[];
 // 用来保存图片路径的数组
 var typelistAll=[];
 // 社区热门类型列表
-
-function getBackHref(){
-   var reqStr = getQueryVariable('from')
-   switch(reqStr){
-     case 'found':
-        return `./foundCommunity.html?openId=${openId}&masterSecret=${masterSecret}`;
-       break;
-     case 'mine':
-        return `./mineCommunity.html?openId=${openId}&masterSecret=${masterSecret}`;  
-       break;
-   }
-}
-
   /*这个函数是为了保证浏览者点击introTextarea这层div时，使焦点自动移动到textarea*/
   function focusTextarea() {
     $('#introTxt').css('display','none')
@@ -70,8 +61,7 @@ function longsize(v){
 function clickMenu1() {  
    $("#upload_file").click();
   }
-  function fileChange(el) {
-    
+function fileChange(el) {    
     if (!el.target.files[0].size) return;
      fileList(el.target);
   }
@@ -140,6 +130,7 @@ function clickMenu1() {
     imghtml()
   }
 function imghtml(){   
+  
     var htmlstr='';
     for(var i=0;i<imgList.length;i++){
         htmlstr+= `
@@ -163,6 +154,7 @@ function imghtml(){
           </div>`
           $('#m-img').html(htmlstr);
     }
+    manageimgurl()
 
 }
 function labelfn(id,val){
@@ -173,46 +165,37 @@ function labelfn(id,val){
     //去除前后的空格
     var strs=val.replace(/(^\s+)|(\s+$)/g, "");
     //是否为长度为小于2的汉字
-    if(strs.match(/^[\u4e00-\u9fa5]{1,2}$/)){
-      //是否为长度为4-20的英文
-      // 打开下一个标签的输入
-      if(num<=3){
-        // $('#labelInp'+num).removeAttr('disabled')
-      }
-    }else if(strs.match(/[a-zA-Z]{2,20}$/)){
-      if(num<=3){
-        // $('#labelInp'+num).removeAttr(' disabled')
-      }
-    }else{
+    if(strs.match(/^[\u4e00-\u9fa5]{1,2}$/)|| strs.match(/^[a-zA-Z]{2,10}$/)){
+  }else{
       Toast('标签为两位数汉字或两个英文单词')
       event.target.value='';
     }
-
   }else{
-    Toast('您还未输入标签啊内容')
+    Toast('您还未输入标签内容')
   }
 }
-function select(){
-  if (checkSystem()) {
-    window.location.href = `./selectionsort.html?openId=${openId}&masterSecret=${masterSecret}`
-  } else {
-    data_href(`./selectionsort.html?openId=${openId}&masterSecret=${masterSecret}`)
-  }
-}
+
 //事件返回
 function back(){
-  window.history.go(-1)
+  if (checkSystem()) {
+    window.webkit.messageHandlers.haiyiJSCallNativeHandler.postMessage({
+        "action": "back"
+    }); 
+} else {
+    window.android.haiyiJSCallNativeHandler('back', '')  
+}
 }
 // 点击发布按钮
 
 
 $('.m-button-div').click(function(){
-   manageimgurl()
+ 
   // 获取当前选中的类型的code值
   judgeType($('#picker').val())
     // 判断帖子标题是否为空
   from.newsTitle=$('#titleInp').val();
   from.summary=$('#textArea').val(); 
+  jointLabel()
   if(from.newsTitle.length == 0 || from.newsTitle.match(/^\s+$/g)){
     Toast('请填写动态标题')
   }else if(!from.newsType){
@@ -220,13 +203,14 @@ $('.m-button-div').click(function(){
   }else if(from.summary.length == 0 || from.summary.match(/^\s+$/g)){
     Toast('请填写动态内容')
   }else{
-    release()    
+        release() 
+
   }
 })
 
 // 发布时请求的ajax
 function release(){
-  jointLabel()
+  $.showLoading('正在提交')
   $.ajax({
     //提交数据的类型 POST GET
     crossDomain: true,
@@ -253,11 +237,26 @@ function release(){
         'appId': appId,
     },
     success: function (data) {
-      console.log(data)
+      $.hideLoading()  
+      if(data.status===0){
+        Toast('发布成功')        
+        localStorage.clear();
+        var dynamicDetailsID=parseInt(data.msg)
+        if (checkSystem()) {
+          window.location.href = `./dynamicDetails.html?openId=${openId}&masterSecret=${masterSecret}&busiId=${dynamicDetailsID}&h5fromx=Release`
+        } else {
+          data_href(`./dynamicDetails.html?openId=${openId}&masterSecret=${masterSecret}&busiId=${dynamicDetailsID}&h5form=Release`)
+        }
+      
+      }else{
+        Toast('发布失败')
+      }
     },
     //调用出错执行的函数
     error: function () {
+      $.hideLoading()  
         //请求出错处理
+        Toast('发布失败')
      
     }
 });
@@ -301,6 +300,7 @@ function ueryType(){
   });
 }
 function manageimgurl(){
+  console.log(123)
   var formData = new FormData()
              for(var i = 0; i < imgList.length; i++) {           
                 formData.append('file', imgList[i].file);
@@ -351,3 +351,9 @@ function jointLabel(){
   from.subTitle=(from.subTitle.substring(from.subTitle.length-1)==',')?from.subTitle.substring(0,from.subTitle.length-1):from.subTitle;
 }
 // 处理图片url
+$("input").on("blur",function(){
+	window.scroll(0,0);//失焦后强制让页面归位
+});
+$('#picker').click(function () {
+  document.activeElement.blur();
+})

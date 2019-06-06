@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css//pageHeader.css">
     <link rel="stylesheet" href="../css/iconfont/iconfont.css">
     <link rel="stylesheet" href="../css/communityInfo.css">
+    <link rel="stylesheet" href="../css/mine.css">
     <link rel="stylesheet" href="../css/weui.css">
     <link rel="stylesheet" href="../css/jqweui.css">
     <link rel="stylesheet" href="../css/touchTouch/touchTouch.css">
@@ -16,58 +17,29 @@
     <script src="../js/pub/qianming.js"></script>
     <script src="../js/pub/publicJS.js"></script>
     <script src="../js/touchJs/touchTouch.jquery.js"></script>
-    <title>社区详情</title>
+    <title>我的发帖</title>
 </head>
 
 <body>
     <div class="container">
-        <header class="community_header" id="comHeader">
-            <div class="header_wrap">
-                <div class="header header_bg" style="background: none">
-                    <div class="header_back" onclick="back()">
-                        <div class="back_btn">
-                            <span class="iconfont icon-fenxiang"></span>
+        <div class="header_wrap">
+            <div class="header header_bg">
+                <div class="header_back" onclick="back()">
+                    <div class="back_btn">
+                        <i class="iconfont icon-fenxiang"></i>
+                    </div>
+                </div>
+                <div class="header_name">
+                    <span>我的社区</span>
+                </div>
+                <div class="header_manage">
+                        <div class="next_pagebtn" onclick="backcreated()">
+                            <span style="color:black">创建社区</span>
                         </div>
-                    </div>
-                    <div class="header_name">
-                        <span></span>
-                    </div>
-                    
-                    <div class="header_manage">
-                        <a href="" id="found_href">
-                            <div class="next_pagebtn">
-                                <span class="iconfont icon-sousuo"></span>
-                            </div>
-                        </a>
-                    </div>
                 </div>
             </div>
-            <div class="commnuity_Info">
-                <div class="community_headwrap">
-                    <div class="community_headimg">
-                        <img id="communityImg" src="../img/demoimg/mm.jpg"  onerror="this.src='../img/dbm_images/logo.png'" alt="">
-                    </div>
-                </div>
-                <div class="community_namewrap">
-                    <div class="community_box">
-                        <div class="community_name" id="communityName">
-                            Art艺术社区
-                        </div>
-                        <div class="comunity_usercount">
-                            <span id="communityUserCount">9012</span>人
-                        </div>
-                    </div>
-
-                </div>
-                <div class="community_btnwrap">
-                    <div class="btn_box" id="jionCommunity">
-                        <span class="iconfont icon-jia"></span>加入
-                    </div>
-                </div>
-            </div>
-            
-        </header>
-        <div class="split_line"></div>
+            <!-- <div class="header_bottom"></div> -->
+        </div>
         <article id="community_art">
             <div class="community_main">
                 <div class="weui-pull-to-refresh__layer">
@@ -77,7 +49,7 @@
                     <div class="up">释放刷新</div>
                     <div class="refresh">正在刷新</div>
                 </div>
-                <div class="community_body">
+                <div class="community_body" style="width: 95%;margin:0 auto">
                     
                     
                 </div>
@@ -94,6 +66,5 @@
     </div>
 </body>
     <script type="text/javascript" src="../js/pub/jquery_weui.js"></script>
-    <script type="text/javascript" src="../js/communityInfo.js"></script>
-
+    <script type="text/javascript" src="../js/mine.js"></script>
 </html>

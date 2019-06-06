@@ -1,5 +1,4 @@
 
-
 var communityInfo = {
         name:'',
         channelId:'',
@@ -88,7 +87,12 @@ function getComunityInfo(){
             $('#communityName').text(data.obj.channelName)
             $('#communityImg').attr( 'src', data.obj.communityIcon)
             $('#communityUserCount').text(data.obj.attentionCount)
-            $('#comHeader').css('background','url(../img/demoimg/mm.jpg)')
+            if(data.obj.headPic){
+                $('#comHeader').css('background',`url(${IMGAPI+data.obj.headPic})`)
+            }else{
+                $('#comHeader').css('background','url(../img/dbm_images/logo.png)')
+            }
+           
             if(data.obj.joinFlag){
                 $('#jionCommunity').attr('joinFlag',data.obj.joinFlag)
                 $('#jionCommunity').css('background','#585e63')
@@ -105,6 +109,7 @@ function getCommunityList(){
     var sessionCommunityInfo = JSON.parse(window.sessionStorage.getItem('communityInfo'))
     if( sessionCommunityInfo ){
         communityInfo = sessionCommunityInfo
+        getAnyMore(communityInfo.currentPage,communityInfo.totalPages)
         renderList(communityInfo.list) 
         $('.community_main').scrollTop(communityInfo.scrollTop)
         window.sessionStorage.clear()
@@ -126,9 +131,10 @@ function getCommunityList(){
         data: {
             channelId: cId,
             currentPage: communityInfo.currentPage,
-            pageSize: 4
+            pageSize: 10
         },
         success: function (data) {
+            console.log(data)
             if(data.status){
                 Toast(data.msg)
             }
@@ -185,11 +191,12 @@ function renderList(arr){
    
     var htmlStr = ''
     arr.forEach(function(item) {
+        var imgIcon = item.icon
         htmlStr = `<div onclick="toMessageInfo(${item.newsId})">
         <div class="community_item">
             <div class="community_item_top">
                 <div class=" community_item_head">
-                    <img src="${item.headPic}" onerror="this.src='../img/demoimg/mm.jpg'" />
+                    <img src="${item.headPic}" onerror="this.src='../img/dbm_images/logo.png'" />
                 </div>
                 <div style="flex:1;">
                     <div class="community_item_username">
@@ -201,19 +208,15 @@ function renderList(arr){
             <div class="community_item_center">
                 <div class="community_item_content"><span>${item.newsTitle}</span></div>  
                 <div class="community_item_content"><span>${item.summary}</span></div>
-                <div class="community_item_imgs" id="thumbs">
-                    <div>
-                        <a href="${IMGAPI+item.icon}">
-                                <img src="${IMGAPI+item.icon}" alt="" onerror="this.src='../img/dbm_images/dbm_default.png'">
-                        </a>
-                    </div>
+                <div class="community_item_imgs thumbs" newsId="${item.newsId}" >
+                    
                 </div>
             </div>
         </div>
         <div class="community_item_operate">
             <div class="operate_box">
                 <div>
-                    <span class="iconfont icon-xin operate_icon" onclick="handleFavorite()"></span>
+                    <span dzId="${item.newsId}" isVote="${item.isVote}" class="iconfont operate_icon" onclick="clickLike(${item.newsId},${item.upVoteCount},this,event)"></span>
                     <span class="operate_count">${item.upVoteCount}</span>
                 </div>
                 <div>
@@ -221,18 +224,36 @@ function renderList(arr){
                     <span class="operate_count">${item.commentNum}</span>
                 </div>
                 <div>
-                    <span class="iconfont icon-shanchu operate_icon" delete="${item.delFlag}" onclick="handleDelete(${item.newsId})"></span>
+                    <span class="iconfont operate_icon" deleteId="${item.newsId}" onclick="handleDelete(${item.newsId},event)"></span>
                 </div>
             </div>
         </div>
         <div class="split_line"></div>
     </div>`
-    $('.community_body').append(htmlStr)
+        $('.community_body').append(htmlStr)
+        if(imgIcon){
+            var str = `<div>
+                        <a href="${IMGAPI+imgIcon}">
+                            <img src="${IMGAPI+imgIcon}"alt="" onerror="this.src='../img/dbm_images/logo.png'">
+                        </a>
+                     </div>`
+            $(`div[newsId='${item.newsId}']`).html(str);
+        }
+        if(parseInt(item.isVote)){
+            $(`span[dzId='${item.newsId}']`).addClass('icon-dianzan1');
+            
+           
+        }else{
+            $(`span[dzId='${item.newsId}']`).addClass('icon-xin');
+        }
+        if(parseInt(item.delFlag)){
+            $(`span[deleteId='${item.newsId}']`).addClass('icon-shanchu')
+        }
     });
     
-    $('#thumbs a').touchTouch();
+    $('.thumbs a').touchTouch();
     //阻止图片查看
-    $('#thumbs a').on('click',function(e){
+    $('.thumbs a').on('click',function(e){
         e.stopPropagation();
         return
     })
@@ -246,16 +267,146 @@ function toMessageInfo(id){
     communityInfo.scrollTop = $('.community_main').scrollTop()
     window.sessionStorage.setItem('communityInfo',JSON.stringify( communityInfo ))
     if (checkSystem()) {
-        window.location.href =`./dynamicDetails.html?openId=${openId}&masterSecret=${masterSecret}&newsId=${id}`
+        window.location.href =`./postDetails.html?openId=${openId}&masterSecret=${masterSecret}&newsId=${id}`
         } else {
-         data_href(`./dynamicDetails.html?openId=${openId}&masterSecret=${masterSecret}&newsId${id}`)
+         data_href(`./postDetails.html?openId=${openId}&masterSecret=${masterSecret}&newsId=${id}`)
         }
+}
+
+/**
+ * @param {*} id 贴子id
+ * @param {*} isvote 是否点赞 0未点赞  1点赞
+ * @param {*} upVoteCount 点赞数
+ * @param {*} obj 元素本身
+ * @param {*} e    事件机制
+ */
+function clickLike(id,upVoteCount,obj,e){
+    e.stopPropagation()
+    var isVote = parseInt(e.target.getAttribute('isVote')) 
+    var upVoteCount = parseInt(upVoteCount)
+    console.log(isVote)
+    if(isVote){
+        $.ajax({
+            crossDomain: true,
+            type: "GET",
+            jsonp: "callback",
+            jsonpCallback: "successCallback",
+            url: API + "/comment/deleteVoteUp.shtml",
+            //提交的数据
+            headers:{
+                openId: openId,
+                signature: signature,
+                nonceStr: nonceStr,
+                timestamp: timestamp,
+                appId: appId,
+            },
+            data: {
+                busiType:2,
+                busiId:id
+            },
+            success: function (data) {
+                if(!data.status === 0){
+                    Toast(data.msg);
+                    return
+                }
+                $(obj).removeClass('icon-dianzan1').addClass('icon-xin');
+                e.target.setAttribute('isVote',0)
+                // console.log($(obj).next().html())
+                $(obj).next().html(parseInt($(obj).next().html())-1)
+            },
+            error: function () {
+                Toast('出错啦')
+            }
+        })
+    }else{
+        $.ajax({
+            crossDomain: true,
+            type: "GET",
+            jsonp: "callback",
+            jsonpCallback: "successCallback",
+            url: API + "/comment/createVoteUp.shtml",
+            //提交的数据
+            headers:{
+                openId: openId,
+                signature: signature,
+                nonceStr: nonceStr,
+                timestamp: timestamp,
+                appId: appId,
+            },
+            data: {
+                busiType:2,
+                busiId:id
+            },
+            success: function (data) {
+                if(!data.status === 0){
+                    Toast(data.msg);
+                    return
+                }
+                $(obj).removeClass('icon-xin').addClass('icon-dianzan1');
+                e.target.setAttribute('isVote',1)
+                // console.log()
+                $(obj).next().html(parseInt($(obj).next().html())+1)
+            },
+            error: function () {
+                Toast('出错啦')
+            }
+        })
+    }
+    
 }
 /**
  * 删除贴子
  * @param {} id 
  */
-function handleDelete(id){
+function handleDelete(id,event){
+    event.stopPropagation();
+   
+    $.confirm('你确定要删除贴子吗?',function(){
+        
+        
+        $.ajax({
+            crossDomain: true,
+            type: "GET",
+            jsonp: "callback",
+            jsonpCallback: "successCallback",
+            url: API + "/dynamic/delectTranspondDynamic",
+            headers:{
+                openId: openId,
+                signature: signature,
+                nonceStr: nonceStr,
+                timestamp: timestamp,
+                appId: appId,
+            },
+            data: {
+                newsId: id,
 
+            },
+            success: function (data) {
+                if(data.status){
+                    Toast(data.msg)
+                }
+                communityInfo.list.forEach(function(item,index){
+                    if(id == item.newsId){
+                       communityInfo.list.splice(index,1)
+                       $('.community_body').html('')
+                       renderList(communityInfo.list)
+                    }
+                })
+                Toast('删除成功')
+                if(communityInfo.list.length <= LAST_COUNT){
+                    if(communityInfo.currentPage<communityInfo.totalPages){
+                        communityInfo.currentPage++;
+                        getCommunityList()
+                    } 
+                }
+            },
+            error: function () {
+                Toast('删除失败')
+            }
+        })
+    },function(){
+
+    })
+    
 }
 

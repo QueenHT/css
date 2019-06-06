@@ -1,0 +1,148 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-size: .4rem;
+}
+.m-content{
+    width: 100%;
+    overflow: scroll;
+    position: relative;
+}
+.m-body{
+    width:95%;
+      margin:.5rem auto;
+      position: relative;
+      height: 4rem;   
+      border:  1px solid #ccc;
+    }
+    #textArea {
+        position: absolute;
+        width: 100%;
+        font-size: .4rem;
+        margin:0 auto;   
+        height: 3.5rem;
+        border: none;
+        resize:none ;
+        outline:none;
+    }
+    
+    .m-body div {
+        position: absolute;
+    }
+    .abnormal{
+        width: 90%;
+        margin: 0 auto;
+        color: #bfbfbf;
+    }
+    #g-long-text{
+        position: absolute;
+        bottom: 0rem;
+        right: .2rem;
+        font-size: .35rem;
+        color: #bfbfbf;
+    }
+    .m-con-header{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .g-tx{
+        width: 1rem;
+        margin-left: .1rem;
+    }
+    .g-tx img{
+        width: 100%;
+        border-radius: .1rem;
+    }
+    .g-name-div{
+        width:65%;
+        margin-left: .3rem;
+    }
+    .g-time{
+        font-size: .3rem;
+        color:#a3a3a3;
+        line-height: .4rem;
+        height: .4rem;
+    }
+    .g-new {
+        line-height: .6rem;
+        height: .6rem;
+    }
+    .g-new div{
+        font-size: .28rem;
+        color: #fff;
+        background: #149cda;
+        width: 1rem;
+        text-align: center;
+        line-height: .4rem;
+        border-radius: .08rem;
+    }
+    .g-btn div{
+        background: #149cda;
+        color: #fff;
+        width: 1.6rem;
+        line-height: .7rem;
+        text-align: center;
+        height: .7rem;
+        font-size: .35rem;
+        border-radius: .5rem;
+    }
+    .g-del-btn div{
+        background: #149cda;
+        color: #fff;
+        width: 2rem;
+        line-height: .7rem;
+        text-align: center;
+        height: .7rem;
+        font-size: .35rem;
+        border-radius: .5rem;
+    }
+    .dynamicContent{
+        width: 85%;
+        margin: 0 auto;
+        margin-top: .8rem;
+        margin-bottom: 2rem;
+    }
+    .content{
+        letter-spacing: .01rem;
+        margin: .05rem 0;
+        word-wrap: break-word;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        width: 100%;
+        text-indent: .8rem;
+        font-size: .4rem;
+    }
+    .g-img{
+        width: 100%;
+         margin:  .2rem auto;
+         margin-bottom: 0;
+         text-align: center;
+     
+     }
+     .g-img img{
+        max-width: 100%;
+        max-width: 5rem;  
+        border-radius: .2rem;
+     }
+     .m-button-div{  
+         position: absolute;
+          bottom: .8rem;
+          /* margin:2rem auto; */
+        width: 100%;      
+        text-align: center;
+    }
+    .g-button{
+        width: 7.5rem;
+        margin: 0 auto;
+        margin-top: 1.3rem;
+        font-size: .45rem;
+        color: #fff;
+        height: 1.2rem;
+        line-height: 1.2rem;
+        border-radius: .7rem;
+        background: #131313;
+    }
+ 

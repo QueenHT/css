@@ -1,8 +1,7 @@
-
 var name=localStorage.getItem('communityname')
 var nameid=localStorage.getItem('communityId')
 var size=0;
-var from={
+var form={
   newsTitle:"",
   // 帖子标题
   subTitle:"",
@@ -13,15 +12,17 @@ var from={
   // 类型
   summary:"",
   // 内容
-  icon:[]
-  // 图片
+  icon:[],
+  // 用来保存图片路径的数组
+  imgstr:""
+  // 用来保存渲染图片的字符串
   };
-// from用来保存需要用到的数据
+// form用来保存需要用到的数据
 var imgList=[];
 // 用来保存渲染图片是图片src的数组
-var imgstr = "";
-// 用来保存图片路径的数组
-var icon;
+// var form.imgstr  = "";
+// // 用来保存图片路径的数组
+// var icon=[];
 setHeight();
 // 设置m-content的高度
 function setHeight(){
@@ -34,28 +35,26 @@ function setHeight(){
 if(!name|| name=='null'){
   $('.fl-tz-div').html(`\<div class="fl-tz-tex">去选择</div>
   <div class="fl-tz-img"><img src="../img/right.png" alt="" srcset=""></div>`)
-  $('.fl-tz-div').css('color','#bfbfbf') 
+  $('.fl-tz-div').css('color','#bfbfbf') ;
+  // 使用go(-1)时会有数据缓存清除数据 
+ $('#textArea').val('');
+  imgList=[];
+  form.icon=[];
+  $('input').val('')
 }else{
-  from.channelId=nameid;
+  form.channelId=nameid;
   $('.fl-tz-div').html(name)
   $('.fl-tz-div').css('color','#000')
   renderData();
 }
-$('#post_href').attr('href',getBackHref())
-function getBackHref(){
+function back(){
   localStorage.clear();
- console.log
-   var reqStr = getQueryVariable('from')
-   switch(reqStr){
-     case 'found':
-        return `./foundCommunity.html?openId=${openId}&masterSecret=${masterSecret}`;
-       break;
-     case 'mine':
-        return `./mineCommunity.html?openId=${openId}&masterSecret=${masterSecret}`;  
-       break;
+   var from = getQueryVariable('from')  
+   if(from){
+    goBackfn()
+   }else{
+    window.history.go(-1)  
    }
-  
-  
 }
 
   /*这个函数是为了保证浏览者点击introTextarea这层div时，使焦点自动移动到textarea*/
@@ -150,9 +149,9 @@ function fileChange(el) {
     imghtml()
   }
 function imghtml(){    
-    imgstr='';
+    form.imgstr='';
     for(var i=0;i<imgList.length;i++){
-      imgstr+= `
+      form.imgstr+= `
          <div class="img-upload">
          <div class="img-show"  style="background-image: url(`+imgList[i].file.src+`)">
             
@@ -163,88 +162,80 @@ function imghtml(){
        </div>`
      }
     if(imgList.length>=6){
-       $('#m-img').html(imgstr);
+       $('#m-img').html(form.imgstr);
     }else{
-      imgstr+=`  <div  class="fujian" id="fujian" onclick="clickMenu1()">
+      form.imgstr+=`  <div  class="fujian" id="fujian" onclick="clickMenu1()">
             <div style="width:1.6rem;height:1.6rem;margin:0 auto;text-align:center;">
               <img style="width:40%;padding-top:0.6rem;" src="../img/add.png" alt>
             </div>
               <div style="width:100%;height:.6rem;text-align:center">照片</div>           
           </div>`
-          $('#m-img').html(imgstr);
+          $('#m-img').html(form.imgstr);
     }
     manageimgurl()
    
 }
 function labelfn(id,val){
   // 得到当前是第几个输入框
-  var num=parseInt(id.charAt(id.length-1))+1
   if(val){
     // 判断输入的内容
     //去除前后的空格
     var strs=val.replace(/(^\s+)|(\s+$)/g, "");
     //是否为长度为小于2的汉字
-    if(strs.match(/^[\u4e00-\u9fa5]{1,2}$/)){
-      //是否为长度为4-20的英文
-      // 打开下一个标签的输入
-      // if(num<=3){
-      //   $('#labelInp'+num).removeAttr('disabled')
-      // }
-    }else if(strs.match(/[a-zA-Z]{2,20}$/)){
-      // if(num<=3){
-      //   // $('#labelInp'+num).removeAttr(' disabled')
-      // }
+    if(strs.match(/^[\u4e00-\u9fa5]{1,2}$/)||strs.match(/^[a-zA-Z]{2,10}$/)){
     }else{
       Toast('标签为两位数汉字或两个英文单词')
       event.target.value='';
     }
-
   }else{
-    Toast('您还未输入标签啊内容')
+    Toast('您还未输入标签内容')
   }
 }
 function select(){
   // 跳转页面前 在本地保存已经输入的值。
-  from.newsTitle=$('#titleInp').val();
+  form.newsTitle=$('#titleInp').val();
   // 标题
-  from.summary=$('#textArea').val().replace(/(^\s+)|(\s+$)/g, ""); 
+  form.summary=$('#textArea').val().replace(/(^\s+)|(\s+$)/g, ""); 
   // 内容
+  form.imgstr=form.imgstr;
+  // 图片数组
+  form.icon=form.icon;
+  // 处理后的图片数组
+  form.imgList=imgList;
+  // 本地图片路径
   jointLabel();
-  // 执行处理标签事件 为from.subtitle赋值
-  localStorage.setItem('DBMfrom',JSON.stringify(from));
+  // 执行处理标签事件 为form.subtitle赋值
+  localStorage.setItem('DBMform',JSON.stringify(form));
+  localStorage.setItem('imgList',JSON.stringify(imgList));
   if (checkSystem()) {
     window.location.href = `./selectionsort.html?openId=${openId}&masterSecret=${masterSecret}`
   } else {
     data_href(`./selectionsort.html?openId=${openId}&masterSecret=${masterSecret}`)
   }
 }
-//事件返回
-function back(){
-  window.history.go(-1)
-}
-// 点击发布按钮
+// 拼接输入的标签
 function jointLabel(){  
-  from.subTitle=''
+  form.subTitle=''
   $('.g-bq-div input').each(function(){
     if($(this).val()){
-      from.subTitle+=$(this).val()+',';
+      form.subTitle+=$(this).val()+',';
     }  
     
   });
-  from.subTitle=(from.subTitle.substring(from.subTitle.length-1)==',')?from.subTitle.substring(0,from.subTitle.length-1):from.subTitle;
+  // 去除拼接字符串的最后一个逗号
+  form.subTitle=(form.subTitle.substring(form.subTitle.length-1)==',')?form.subTitle.substring(0,form.subTitle.length-1):form.subTitle;
 }
 // 发布按钮点击事件
-$('.m-button-div').click(function(){
- 
+$('.m-button-div').click(function(){ 
   // 判断帖子标题是否为空
-  from.newsTitle=$('#titleInp').val();
-  from.summary=$('#textArea').val(); 
-  console.log($('#titleInp').val())
-  if(from.newsTitle.length == 0 || from.newsTitle.match(/^\s+$/g)){
+  form.newsTitle=$('#titleInp').val();
+  form.summary=$('#textArea').val(); 
+  jointLabel()
+  if(form.newsTitle.length == 0 || form.newsTitle.match(/^\s+$/g)){
     Toast('请填写帖子标题')
-  }else if(!from.channelId){
+  }else if(!form.channelId){
     Toast('请选择社区')
-  }else if(from.summary.length == 0 || from.summary.match(/^\s+$/g)){
+  }else if(form.summary.length == 0 || form.summary.match(/^\s+$/g)){
     Toast('请填写帖子内容')
   }else{
     release()    
@@ -253,7 +244,7 @@ $('.m-button-div').click(function(){
 
 // 发布时请求的ajax
 function release(){
-  jointLabel()
+  $.showLoading('正在提交')
   $.ajax({
     //提交数据的类型 POST GET
     crossDomain: true,
@@ -264,12 +255,12 @@ function release(){
     url: API + `/dynamic/createDynamic.shtml`,
     //提交的数据
     data: {
-      "newsTitle":from.newsTitle,
-      "subTitle":from.subTitle,
-      "channelId":from.channelId,
-      "targetType":from.targetType,
-      "summary":from.summary,
-      "icon":JSON.stringify(icon),
+      "newsTitle":form.newsTitle,
+      "subTitle":form.subTitle,
+      "channelId":form.channelId,
+      "targetType":form.targetType,
+      "summary":form.summary,
+      "icon":JSON.stringify(form.icon),
     },
     //成功返回之后调用的函数
     headers: {
@@ -280,16 +271,27 @@ function release(){
         'appId': appId,
     },
     success: function (data) {
+      $.hideLoading()  
       if(data.status===0){
         Toast('发布成功')
         localStorage.clear();
+        var dynamicDetailsID=parseInt(data.msg)
+      setTimeout(function(){
+        if (checkSystem()) {
+          window.location.href = `./postDetails.html?openId=${openId}&masterSecret=${masterSecret}&newsId=${dynamicDetailsID}&h5form=Post`
+        } else {
+          data_href(`./postDetails.html?openId=${openId}&masterSecret=${masterSecret}&newsId=${dynamicDetailsID}&h5form=Post`)
+        }
+      },1000)
       }else{
         Toast('发布失败')
       }
     },
     //调用出错执行的函数
     error: function () {
+      $.hideLoading()  
         //请求出错处理
+        Toast('发布失败')
      
     }
 });
@@ -314,10 +316,10 @@ function manageimgurl(){
     data:formData,
     //成功返回之后调用的函数
     success: function (data) {
-      icon=[];
+      form.icon=[];
       var list=data.list;
       for(var i=0;i<list.length;i++){
-        icon.push({ path:list[i].newName})
+        form.icon.push({ path:list[i].newName})
       }
     },
     //调用出错执行的函数
@@ -327,20 +329,27 @@ function manageimgurl(){
 });
 }
 function renderData(){
-  var localfrom=JSON.parse(localStorage.getItem('DBMfrom'));
-    $('#titleInp').val(localfrom.newsTitle);
+  var localform=JSON.parse(localStorage.getItem('DBMform'));
+    $('#titleInp').val(localform.newsTitle);
   // 标题
-
-if(localfrom.summary.length != 0){
-  $('#textArea').val(localfrom.summary);
+if(localform.summary.length != 0){
+  $('#textArea').val(localform.summary);
   $('#introTxt').css('display','none')
   }
-labelhtml(localfrom.subTitle);
+labelhtml(localform.subTitle);
+imgList=localform.imgList;
+form.icon=localform.icon;
+if(localform.imgstr){
+  $('#m-img').html(localform.imgstr)
+}
+
 }
 // 处理本地存储传过来的label字符串
 function labelhtml(label){
+ if(label){
   var labellist=label.split(",")
   labellist.forEach(function (item, index) {
      $('#labelInp'+index+1).val(item);
   })
+ }
 }

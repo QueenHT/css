@@ -58,6 +58,7 @@ $('.g-button').click(function(){
 })
 // 申请加入社区接口调试
 function joincommuntiy(){
+    $.showLoading('正在提交')
     $.ajax({
         //提交数据的类型 POST GET
         crossDomain: true,
@@ -77,9 +78,13 @@ function joincommuntiy(){
         },
         //成功返回之后调用的函数
         success: function (data) {
+            $.hideLoading()
             if(data.status==0){  
                 $.hideLoading()             
                 Toast('申请成功')
+                setTimeout(function(){
+                    window.history.go(-1)
+                  },1000)
     
             }else{
                 $.hideLoading()
@@ -88,6 +93,7 @@ function joincommuntiy(){
         },
         //调用出错执行的函数
         error: function () {
+            $.hideLoading()
             //请求出错处理
         }
     }); 

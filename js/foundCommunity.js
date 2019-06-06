@@ -57,8 +57,7 @@
             loading = false;
         }, 1000); //模拟延迟
     });
-    $('#found_href').attr('href',`./postmessage.html?from=found&openId=${openId}&masterSecret=${masterSecret}`)
-  
+    $('#found_href').attr('href',`./postmessage.html?openId=${openId}&masterSecret=${masterSecret}`)  
         computedScrollHeight();
         getClassification()
         getJoined()
@@ -154,13 +153,13 @@
     //点击去我的社区
     function toMineCommunity(){
         if (checkSystem()) {
-            window.webkit.messageHandlers.haiyiJSCallNativeHandler.postMessage({
-                "action": "hiddenTabs"
-            });
+            // window.webkit.messageHandlers.haiyiJSCallNativeHandler.postMessage({
+            //     "action": "hiddenTabs"
+            // });
             window.location.href =`./mineCommunity.html?openId=${openId}&masterSecret=${masterSecret}`
       
         } else {
-            window.android.haiyiJSCallNativeHandler('hiddenTabs', '')
+            // window.android.haiyiJSCallNativeHandler('hiddenTabs', '')
             data_href(`./mineCommunity.html?openId=${openId}&masterSecret=${masterSecret}`)
         }
     }
@@ -267,9 +266,11 @@
     
     //渲染列表
     function renderHtml(arr){
-      
+        console.log(arr)
         var htmlStr = ''
+       
         arr.forEach(function (item){
+            var imgIcon = item.icon
             htmlStr = `   <div>
             <div class="community_item" onclick="toMessageInfo(${item.newsId})">
                 <div class="community_item_top">
@@ -286,19 +287,15 @@
                 <div class="community_item_center">
                     <div class="community_item_content"><span>${item.newsTitle}</span></div>
                     <div class="community_item_content"><span>${item.summary}</span></div>
-                    <div class="community_item_imgs" id="thumbs">
-                        <div>
-                            <a href="${IMGAPI+item.icon}">
-                                <img src="${IMGAPI+item.icon}"alt="" onerror="this.src='../img/dbm_images/dbm_default.png'">
-                            </a>
-                        </div>
+                    <div class="community_item_imgs thumbs" newsId="${item.newsId}" >
+                        
                     </div>
                 </div>
             </div>
             <div class="community_item_operate">
                 <div class="operate_box">
-                    <div>
-                        <span class="iconfont icon-xin operate_icon"></span>
+                    <div >
+                        <span dzId="${item.newsId}" isVote="${item.isVote}" class="iconfont operate_icon" onclick="clickLike(${item.newsId},${item.upVoteCount},this,event)"></span>
                         <span class="operate_count">${item.upVoteCount}</span>
                     </div>
                     <div>
@@ -312,13 +309,28 @@
             </div>
             <div class="split_line"></div>
         </div>`
-        $('.community_body').append(htmlStr)
+
+            $('.community_body').append(htmlStr)
+            if(imgIcon){
+                var str = `<div>
+                            <a href="${IMGAPI+imgIcon}">
+                                <img src="${IMGAPI+imgIcon}"alt="" onerror="this.src='../img/demoimg/mm.jpg'">
+                            </a>
+                         </div>`
+                $(`div[newsId='${item.newsId}']`).html(str);
+            }
+            if(parseInt(item.isVote)){
+                $(`span[dzId='${item.newsId}']`).addClass('icon-dianzan1');
+            }else{
+                $(`span[dzId='${item.newsId}']`).addClass('icon-xin');
+            }
+
         })
-        $('#thumbs a').on('click',function(e){
+        $('.thumbs a').on('click',function(e){
             e.stopPropagation();
             return
         })
-        $('#thumbs a').touchTouch();
+        $('.thumbs a').touchTouch();
     }
 
     /**
@@ -329,9 +341,9 @@ function toMessageInfo(id){
     foundCommunity.scrollTop = $('.scroll_wrap').scrollTop()
     window.sessionStorage.setItem('foundCommunity',JSON.stringify(foundCommunity))
     if (checkSystem()) {
-        window.location.href =`./dynamicDetails.html?openId=${openId}&masterSecret=${masterSecret}&newsId=${id}`
+        window.location.href =`./postDetails.html?openId=${openId}&masterSecret=${masterSecret}&newsId=${id}`
         } else {
-         data_href(`./dynamicDetails.html?openId=${openId}&masterSecret=${masterSecret}&newsId${id}`)
+         data_href(`./postDetails.html?openId=${openId}&masterSecret=${masterSecret}&newsId=${id}`)
         }
 }
 
@@ -344,5 +356,86 @@ function getAnyMore(currentPage,totalPages){
         $('#noMore').css('display','block')
         $('#wait').css('display','none')
     }
+}
+/**
+ * @param {*} id 贴子id
+ * @param {*} isvote 是否点赞 0未点赞  1点赞
+ * @param {*} upVoteCount 点赞数
+ * @param {*} obj 元素本身
+ * @param {*} e    事件机制
+ */
+function clickLike(id,upVoteCount,obj,e){
+    e.stopPropagation()
+    var isVote = parseInt(e.target.getAttribute('isVote')) 
+    var upVoteCount = parseInt(upVoteCount)
+    console.log(isVote)
+    if(isVote){
+        $.ajax({
+            crossDomain: true,
+            type: "GET",
+            jsonp: "callback",
+            jsonpCallback: "successCallback",
+            url: API + "/comment/deleteVoteUp.shtml",
+            //提交的数据
+            headers:{
+                openId: openId,
+                signature: signature,
+                nonceStr: nonceStr,
+                timestamp: timestamp,
+                appId: appId,
+            },
+            data: {
+                busiType:2,
+                busiId:id
+            },
+            success: function (data) {
+                if(!data.status === 0){
+                    Toast(data.msg);
+                    return
+                }
+                $(obj).removeClass('icon-dianzan1').addClass('icon-xin');
+                e.target.setAttribute('isVote',0)
+                // console.log($(obj).next().html())
+                $(obj).next().html(parseInt($(obj).next().html())-1)
+            },
+            error: function () {
+                Toast('出错啦')
+            }
+        })
+    }else{
+        $.ajax({
+            crossDomain: true,
+            type: "GET",
+            jsonp: "callback",
+            jsonpCallback: "successCallback",
+            url: API + "/comment/createVoteUp.shtml",
+            //提交的数据
+            headers:{
+                openId: openId,
+                signature: signature,
+                nonceStr: nonceStr,
+                timestamp: timestamp,
+                appId: appId,
+            },
+            data: {
+                busiType:2,
+                busiId:id
+            },
+            success: function (data) {
+                if(!data.status === 0){
+                    Toast(data.msg);
+                    return
+                }
+                $(obj).removeClass('icon-xin').addClass('icon-dianzan1');
+                e.target.setAttribute('isVote',1)
+                // console.log()
+                $(obj).next().html(parseInt($(obj).next().html())+1)
+            },
+            error: function () {
+                Toast('出错啦')
+            }
+        })
+    }
+    
 }
 

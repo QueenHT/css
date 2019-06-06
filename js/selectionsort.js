@@ -84,7 +84,7 @@ $('#allclassify').pullToRefresh({
         str += `
                     <div class="community_item" onclick="backpost('${arr[i].channelName}',${arr[i].channelId})">
                     <div class="commuinty_img">
-                        <img src="${arr[i].communityIcon}" alt="">
+                        <img src="${arr[i].communityIcon}" onerror="this.src='../img/dbm_images/logo.png'" alt="">
                     </div>
                     <div class="community_name">
                         <span>${arr[i].channelName}</span>
@@ -147,5 +147,8 @@ function searchCommunity(searchName){
 function backpost(name,id){
     localStorage.setItem('communityname',name);
     localStorage.setItem('communityId',id);
+    window.history.go(-1)
+  }
+  function back(){
     window.history.go(-1)
   }

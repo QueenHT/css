@@ -236,13 +236,7 @@ function dialogBox(message, yesCallback, noCallback) {
 
 
 function back() {
-    if (checkSystem()) {
-        window.webkit.messageHandlers.haiyiJSCallNativeHandler.postMessage({
-            "action": "goBack"
-        });
-    } else {
-        window.android.haiyiJSCallNativeHandler('goBack', '')
-    }
+    goBackfn()
 }
 
 $('.address').pullToRefresh({

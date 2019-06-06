@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../css/pageHeader.css">
+    <link rel="stylesheet" href="../css/mine.css" />
+    <link rel="stylesheet" href="../css/iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/jqweui.css">
+    <link rel="stylesheet" href="../css/weui.css">
+    <script src="../js/pub/jquery_3.2.1.min.js"></script>
+    <script src="../js/pub/crypto_js.js"></script>
+    
+    <script src="../js/pub/qianming.js"></script>
+    <script src="../js/pub/publicJS.js"></script>
+    <script type="text/javascript" src="../js/pub/rem.js"></script>
+    <title>我的社区</title>
+</head>
+
+<body>
+    <div class="mycommunity">
+        <header>
+            <div class="header_wrap">
+                <div class="header header_bg">
+                    <div class="header_back" onclick="back()">
+                        <div class="back_btn">
+                            <i class="iconfont icon-fenxiang"></i>
+                        </div>
+                    </div>
+                    <div class="header_name">
+                        <span>我的社区</span>
+                    </div>
+                    <div class="header_manage">
+                        <a href="" id="all_href">
+                            <div class="next_pagebtn">
+                              
+                            </div>
+                        </a>
+                    </div>
+                </div>
+             
+            </div>
+        </header>
+       <div class="g-body">
+            <div  id="mineCommunity" style="height: 100%">
+                    <div class="weui-pull-to-refresh__layer">
+                        <div class='weui-pull-to-refresh__arrow'></div>
+                        <div class='weui-pull-to-refresh__preloader'></div>
+                        <div class="down">下拉刷新</div>
+                        <div class="up">释放刷新</div>
+                        <div class="refresh">正在刷新</div>
+                    </div>
+                    <div id="allCommunity" style="">
+                        
+                    </div>
+                    <div class="weui-loadmore"  id="wait">
+                            <i class="weui-loading"></i>
+                            <span class="weui-loadmore__tips">正在加载</span>
+                    </div>
+                    <div class="weui-loadmore weui-loadmore_line" id="noMore">
+                        <span class="weui-loadmore__tips" >没有更多</span>
+                    </div>
+                    
+               
+        </div>     
+    </div>
+</div>
+    <a href="" id="href_true"></a>
+</body>
+<script src="../js/pub/jquery_weui.js"></script>
+<script src="../js/managementcommunity.js"></script>
+
+</html>

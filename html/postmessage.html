@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>Document</title>
+    <title>社区发帖</title>
     <link rel="stylesheet" href="../css/pageHeader.css">
     <link rel="stylesheet" href="../css/iconfont/iconfont.css">
     <link rel="stylesheet" href="../css/jqweui.css">
@@ -15,7 +15,7 @@
     <script src="../js/pub/rem.js"></script>
     <script src="../js/pub/qianming.js"></script>
     <script src="../js/pub/publicJS.js"></script>
-    <title>社区发帖</title>
+
 </head>
 
 <body>
@@ -71,15 +71,6 @@
     </div>
 
     <div class="m-img" id="m-img">
-        <!-- <div class="img-upload">
-                <div class="img-show" >
-                    <img style="width: 100%;height: 100%; border-radius: .2rem;" src="../img/info.jpg">
-                  <p class="img-close" @click.stop="fileDel(index)">
-                    <img style="width: 100%;height: 100%;" src="../img/del.png" alt>
-                  </p>
-                </div>
-              </div> -->
-
         <div class="fujian" id="fujian" onclick="clickMenu1()">
             <div style="width:1.6rem;height:1.6rem;margin:0 auto;text-align:center;">
                 <img style="width:40%;padding-top:0.6rem;" src="../img/add.png" alt>
@@ -91,7 +82,7 @@
 
     </div>
     <form ref="pform" id="picform" target="nm_iframe" method="post" name="f_upload" enctype="multipart/form-data">
-        <input ref="uppic" type="file" name="file" id="upload_file" accept="image/*" onchange="fileChange(event)"
+        <input ref="uppic" type="file" name="file" id="upload_file"  capture="camera" accept="image/*" onchange="fileChange(event)"
             style="display: none" multiple>
         <br>
         <!--<input type="file" name="upload" id="upload_file2" accept='image/*' capture="camera" @change="fileChange($event)" style="display: none"><br>-->
@@ -106,7 +97,7 @@
         </div>
     </div>
     <div class="m-button-div">
-        <div class="g-button">发布</div>
+        <div class="g-button blackBtn">发布</div>
     </div>
    </div>
     <a id="href_true" style="display: none;"></a>

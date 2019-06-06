@@ -15,13 +15,19 @@ $("#picker").picker({
         values:typelist
     }]
 });
+// 上一个页面返回是存在的数据
+$('input').val('');
     // 上传图片div点击事件
 function clickMenu1() {  
     indextab=1
+    cutWidth=1;
+    cutHeight=1;
     $("#upload_file").click();
    }
      // 上传图片div点击事件
 function clickMenu2() {  
+    cutWidth=5.5;
+    cutHeight=3;
     indextab=2
     $("#upload_file").click();
     }
@@ -52,10 +58,7 @@ function ueryType(){
         }
     });
 }
-function back(){    
-    window.history.go(-1)
-  
-}
+
 // 处理社区图片url
 function manageCommunityurl(){
     var formData = new FormData()              
@@ -148,8 +151,17 @@ $('.m-footer-btn').click(function(){
                 if(data.status===0){
                     Toast('创建成功')
                     localStorage.clear();
+                    var channelId=parseInt(data.msg)
+                    setTimeout(function(){
+                        if (checkSystem()) {
+                            window.location.href =`./communityInfo.html?openId=${openId}&masterSecret=${masterSecret}&channelId=${channelId}`
+                        } else {
+                             data_href(`./communityInfo.html?openId=${openId}&masterSecret=${masterSecret}&channelId=${channelId}`)
+                        }
+                      },500)
+        
                   }else{
-                    Toast('创建失败')
+                    Toast(data.msg)
                   }
             },
             //调用出错执行的函数
@@ -166,4 +178,12 @@ function  judgeType(val){
             typeId=item.incode
         }     
        })     
+}
+function back(){
+    var from = getQueryVariable('from')  
+    if(from){
+     backurl('postmessage')
+    }else{
+     window.history.go(-1)  
+    }
 }

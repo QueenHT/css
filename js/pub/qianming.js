@@ -1,14 +1,11 @@
-// jQuery.support.cors = true;
+
 const API = 'http://172.20.188.157:8180/api'
-//http://img.hapem.cn/
 const IMGAPI = 'http://image.haiyimall.com/'
-//http://172.20.188.157:8180/api   大斑马
-//http://172.20.188.191:8111/api   黄海供销
-// http://58.57.31.10:8804/api
-// http://172.20.188.191:8111/api
-// https://sjtjc.sijitianjian.com/
+//http://172.20.188.157:8180/api   dbm
+
 const openId = 'cc4e2be9ed5446d88e7b78d4da336328'
 const masterSecret = '4abe15a67a8242fabc48e79cc78bc82b'
+const LAST_COUNT=5;   //删除小于等于此值进行自动加载
 // getUserSecret()
 function getUserSecret(){
     openId = getQueryVariable('openId');

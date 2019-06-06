@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>Document</title>
+    <title>发布动态</title>
     <link rel="stylesheet" href="../css/pageHeader.css">
     <link rel="stylesheet" href="../css/iconfont/iconfont.css">   
     <link rel="stylesheet" href="../css/jqweui.css">
@@ -18,7 +18,7 @@
     <script src="../js/pub/qianming.js"></script>
     <script src="../js/pub/publicJS.js"></script>
     <script src="../js/pub/jquery-from.js"></script>
-    <title>发布动态</title>
+ 
 </head>
 
 <body  style="background: #fff;">
@@ -102,11 +102,11 @@
 
     </div>
     <form  id="picform" method="post" name="f_upload" enctype="multipart/form-data">
-        <input  type="file" name="file" id="upload_file" accept="image/*" onchange="fileChange(event)"
+        <input  type="file" name="file" id="upload_file" accept="image/*"   capture="camera" onchange="fileChange(event)"
             style="display: none" multiple>
         <br>
         <!--<input type="file" name="upload" id="upload_file2" accept='image/*' capture="camera" @change="fileChange($event)" style="display: none"><br>-->
-        <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
+        <!-- <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe> -->
     </form>
     <div class="m-bq">
         <div class="g-bq-title">给个标签</div>
@@ -117,7 +117,7 @@
         </div>
     </div>
     <div class="m-button-div">
-        <div class="g-button">发布</div>
+        <div class="g-button blackBtn">发布</div>
     </div>
    </div>
     <a id="href_true" style="display: none;"></a>

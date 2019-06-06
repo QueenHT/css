@@ -124,7 +124,7 @@ width:90%;
   }
   
   .img-close {   
-    background: #121212;
+    background: #131313;
     position: absolute;
     top: .1rem;
     right: 0.1rem;
@@ -170,13 +170,11 @@ width:90%;
   .g-button{
       width: 7.5rem;
       margin: 0 auto;
-      margin-top: 2rem;
+      margin-top: 1.3rem;
       font-size: .45rem;
-      color: #fff;
       height: 1.2rem;
       line-height: 1.2rem;
       border-radius: .7rem;
-      background: #121212;
   }
   .m-bq{
     width:90%;

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css//pageHeader.css">
+    <link rel="stylesheet" href="../css/iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/communityInfo.css">
+    <link rel="stylesheet" href="../css/weui.css">
+    <link rel="stylesheet" href="../css/jqweui.css">
+    <link rel="stylesheet" href="../css/touchTouch/touchTouch.css">
+    <script src="../js/pub/jquery_3.2.1.min.js"></script>
+    <script src="../js/pub/rem.js"></script>
+    <script src="../js/pub/crypto_js.js"></script>
+    <script src="../js/pub/qianming.js"></script>
+    <script src="../js/pub/publicJS.js"></script>
+    <script src="../js/touchJs/touchTouch.jquery.js"></script>
+    <title>我的动态</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header_wrap" style=" border-bottom: 1px solid #c0c0c0;">
+            <div class="header">
+              
+                <div class="header_back" onclick=" getBackHref()">
+                  
+                        <div class="back_btn">
+                            <i class="iconfont icon-fenxiang"></i>
+                        </div>
+                
+                </div>
+             
+                <div class="header_name">
+                    <span>我的动态</span>
+                </div>
+                <div class="header_manage" onclick="handleMyCommunity()">
+                    <!-- <div class="next_pagebtn">
+                        <span>发帖</span>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <article id="community_art">
+            <div class="community_main">
+                <div class="weui-pull-to-refresh__layer">
+                    <div class='weui-pull-to-refresh__arrow'></div>
+                    <div class='weui-pull-to-refresh__preloader'></div>
+                    <div class="down">下拉刷新</div>
+                    <div class="up">释放刷新</div>
+                    <div class="refresh">正在刷新</div>
+                </div>
+                <div class="community_body">
+                       <!-- <div onclick="toMessageInfo(370)">
+                                <div class="community_item">
+                                    <div class="community_item_top">
+                                        <div class=" community_item_head">
+                                            <img src="../img/demoimg/mm.jpg" onerror="this.src='../img/demoimg/mm.jpg'">
+                                        </div>
+                                        <div style="flex:1;">
+                                            <div class="community_item_username">
+                                                <div><span>大斑马1</span></div>
+                                            </div>
+                                            <div class="community_item_zuanfa"><span>2019-05-22 18:09:45</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="zf_content"> 
+                                        文本呢；啊实打实大多撒所多撒所多所军奥所所大所大所大大所多
+                                    </div>
+                                    <div class="community_item_center_zf">
+                                            <div class="community_item_imgs_zf">
+                                                       <img src="../img/demoimg/mm.jpg" alt="">
+                                            </div>
+                                        <div class="community_item_zf">
+                                            <div class="community_item_zf_title">
+                                                    《空间迷失》
+                                            </div>
+                                            <div class="community_item_zf_subtitle">
+                                                <div class="community_item_subtitle" >
+                                                    欧美
+                                                </div>
+                                                <div class="community_item_subtitle" >
+                                                        欧美
+                                                    </div>
+                                                    <div class="community_item_subtitle" >
+                                                            雕塑
+                                                        </div>
+                                                      
+                                            </div>
+                                         </div>
+                                    </div>
+                                </div>
+                                <div class="community_item_operate">
+                                    <div class="operate_box">
+                                        <div>
+                                            <span dzid="370" isvote="0" class="iconfont operate_icon icon-xin" onclick="clickLike(370,0,this,event)"></span>
+                                            <span class="operate_count">0</span>
+                                        </div>
+                                        <div>
+                                            <span class="iconfont icon-duihua operate_icon" onclick="handleComment()"></span>
+                                            <span class="operate_count">0</span>
+                                        </div>
+                                        <div>
+                                            <span class="iconfont icon-shanchu operate_icon" delete="1" onclick="handleDelete(370)"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="split_line"></div>
+                            </div> -->
+                    <!-- <div onclick="toMessageInfo(370)">
+                        <div class="community_item">
+                            <div class="community_item_top">
+                                <div class=" community_item_head">
+                                    <img src="../img/demoimg/mm.jpg" onerror="this.src='../img/demoimg/mm.jpg'">
+                                </div>
+                                <div style="flex:1;">
+                                    <div class="community_item_username">
+                                        <div><span>大斑马1</span></div>
+                                    </div>
+                                    <div class="community_item_zuanfa"><span>2019-05-22 18:09:45</span></div>
+                                </div>
+                            </div>
+                            <div class="zf_content"> 
+                                文本呢；啊实打实大多撒所多撒所多所军奥所所大所大所大大所多
+                            </div>
+                            <div class="community_item_center_zf">
+                                    <div class="zf_deltext">
+                                           内容不见了
+                                        </div >
+                           
+                            </div>
+                        </div>
+                        <div class="community_item_operate">
+                            <div class="operate_box">
+                                <div>
+                                    <span dzid="370" isvote="0" class="iconfont operate_icon icon-xin" ></span>
+                                    <span class="operate_count">0</span>
+                                </div>
+                                <div>
+                                    <span class="iconfont icon-duihua operate_icon" ></span>
+                                    <span class="operate_count">0</span>
+                                </div>
+                                <div>
+                                    <span class="iconfont icon-shanchu operate_icon" delete="1" onclick="handleDelete(370)"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="split_line"></div>
+                    </div>
+                     -->
+                </div>
+                <div class="weui-loadmore" id="wait">
+                    <i class="weui-loading"></i>
+                    <span class="weui-loadmore__tips">正在加载</span>
+                </div>
+                <div class="weui-loadmore weui-loadmore_line" id="noMore">
+                    <span class="weui-loadmore__tips">没有更多</span>
+                </div>
+            </div>
+        </article>
+        <a id="href_true" href=""></a>
+    </div>
+</body>
+    <script type="text/javascript" src="../js/pub/jquery_weui.js"></script>
+    <script type="text/javascript" src="../js/dynamicList.js"></script>
+
+</html>
