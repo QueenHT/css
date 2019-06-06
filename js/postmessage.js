@@ -356,3 +356,4 @@ var $inputs = document.querySelectorAll('input');
 for(var i =0;i < $inputs.length; i++) {
   listenKeybord($inputs[i]);
 }
+alert('测试')
