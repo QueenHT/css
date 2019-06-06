@@ -194,7 +194,7 @@ function fileChange(el) {
               file
             });
             imghtml()
-          })
+          },2000)
           
           }
         }
