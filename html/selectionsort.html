@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>选择分类</title>
+    <link rel="stylesheet" href="../css/pageHeader.css">
+    <link rel="stylesheet" href="../css/iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/jqweui.css">
+    
+    <link rel="stylesheet" href="../css/selectionsort.css">
+    <script src="../js/pub/jquery_3.2.1.min.js"></script>
+    <script src="../js/pub/jquery_weui.js"></script>
+    <script src="../js/pub/rem.js"></script>
+    <script src="../js/pub/crypto_js.js"></script>
+    <script src="../js/pub/qianming.js"></script>
+    <script src="../js/pub/publicJS.js"></script>
+  
+</head>
+<body>
+        <div class="mycommunity">
+                <header>
+                    <div class="header_wrap">
+                        <div class="header header_bg">
+                            <div class="header_back" onclick="back()">
+                                <div class="back_btn">
+                                    <i class="iconfont icon-fenxiang"></i>
+                                </div>
+                            </div>
+                            <div class="header_name">
+                                <span>请选择社区</span>
+                            </div>
+        
+                            <div class="header_manage">
+                                <a href="" id="mine_href">
+                                    <div class="next_pagebtn">
+                                        <!-- <span style="color:black">所有社区</span> -->
+                                    </div>
+                                </a>
+                            </div>
+        
+                        </div>
+                        <div class="header_bottom"></div>
+                    </div>
+                </header>
+                <div class="searchwrap" id="searchArea">
+                    <div class="search_box">
+                        <div class="search_box_icon">
+                            <i class="iconfont icon-sousuo"></i>
+                        </div>
+                        <div class="search_box_input">
+                                <input id="ssinput" type="text" placeholder="搜索"  onblur="inpblur(value)">
+                        </div>
+                    </div>
+                </div>
+                <div class="minecommunity_body" id="scroll">
+                    <nav class="community_navbox">
+                        <div class="content">
+                            <div class="menu_item">
+                                <div class="menu_itembox" style="background: #f3f5f9">
+                                    <div class="menu_itemtext" onclick="getclassify()">
+                                        我的社区
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                    <div class="community_listwrap">
+                        <div class="content">
+                                <div class="m-gamecontent-div" id="allclassify">
+                                        <div class="weui-pull-to-refresh__layer">
+                                                <div class='weui-pull-to-refresh__arrow'></div>
+                                                <div class='weui-pull-to-refresh__preloader'></div>
+                                                <div class="down">下拉刷新</div>
+                                                <div class="up">释放刷新</div>
+                                                <div class="refresh">正在刷新</div>
+                                            </div>
+                                            <div id="all" style="">
+                                                    <!-- <div class="community_item">
+                                                            <div class="commuinty_img">
+                                                                <img src="" alt="">
+                                                            </div>
+                                                            <div class="community_name">
+                                                                <span>山东油画之家</span>
+                                                            </div>
+                                                        </div>  -->
+                                          </div>
+                                         <!-- <div class="weui-loadmore weui-loadmore_line" id="noMore">
+                                             <span class="weui-loadmore__tips" style=" background: #e9e9e9">没有更多</span>
+                                        </div> -->
+                                           
+                                </div>
+                        
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a id="href_true" style="display: none;"></a>
+       
+</body>
+<script src="../js/selectionsort.js"></script>
+</html>

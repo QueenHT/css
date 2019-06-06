@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>chooseAddress</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../css/pageHeader.css">
+    <link rel="stylesheet" href="../css/iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/jqweui.css">
+    <link rel="stylesheet" href="../css/weui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/address.css" />
+
+    <script src="../js/pub/jquery_3.2.1.min.js"></script>
+    <script src="../js/pub/rem.js"></script>
+    <script src="../js/pub/crypto_js.js"></script>
+    <script src="../js/pub/qianming.js"></script>
+    <script src="../js/publicJS.js"></script>
+</head>
+
+<body>
+    <div class="managerwrap">
+        <div class="header_wrap" style=" border-bottom: 1px solid #c0c0c0;">
+                <div class="header" >
+                    <div class="header_back" onclick="back()">
+                     
+                            <div class="back_btn">
+                                <i class="iconfont icon-fenxiang"></i>
+                            </div>
+                   
+                    </div>
+        
+                    <div class="header_name">
+                        <span>选择地址</span>
+                    </div>
+                    <div class="header_manage" onclick="handleMyCommunity()">
+                        <!-- <div class="next_pagebtn">
+                            <span>发帖</span>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        <div id="#address_wrap">
+            <div class="address">
+                <div class="weui-pull-to-refresh__layer">
+                    <div class='weui-pull-to-refresh__arrow'></div>
+                    <div class='weui-pull-to-refresh__preloader'></div>
+                    <div class="down">下拉刷新</div>
+                    <div class="up">释放刷新</div>
+                    <div class="refresh">正在刷新</div>
+                </div>
+                <div class="conetent">
+                    <div class="address-null" id="addressNull">
+                        你还没有添加收货地址，添加一个吧！
+                    </div>
+                    <div class="address-container" id="addressBox">
+                    </div>
+                    <a id="cHref" href="">
+                        <div class="address-btnbox" style="display: none" id="button">
+                            <div class="add-address" id="add_Address">
+                                新增收货地址
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="../js/pub/jquery_weui.js"></script>
+    <script src="../js/chooseAddress.js"></script>
+
+</body>
+
+</html>

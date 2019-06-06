@@ -1,15 +1,14 @@
 // jQuery.support.cors = true;
 const API = 'http://172.20.188.157:8180/api'
-
 //http://img.hapem.cn/
-// const IMGAPI = 'https://qiniu.apetm.com'
-
+const IMGAPI = 'http://image.haiyimall.com/'
+//http://172.20.188.157:8180/api   大斑马
+//http://172.20.188.191:8111/api   黄海供销
 // http://58.57.31.10:8804/api
 // http://172.20.188.191:8111/api
 // https://sjtjc.sijitianjian.com/
-var openId = 'cc4e2be9ed5446d88e7b78d4da336328'
-var masterSecret = '4abe15a67a8242fabc48e79cc78bc82b'
-var appId=10008;
+const openId = 'cc4e2be9ed5446d88e7b78d4da336328'
+const masterSecret = '4abe15a67a8242fabc48e79cc78bc82b'
 // getUserSecret()
 function getUserSecret(){
     openId = getQueryVariable('openId');
@@ -37,8 +36,9 @@ function randomString(len)
     }
     return pwd;
 }
-var timestamp = (new Date()).valueOf();
-var nonceStr = randomString(20);
-var conent = "nonceStr="+nonceStr+"&openId="+openId+"&timestamp="+timestamp+masterSecret;
-var signature = CryptoJS.MD5(conent).toString()
+const timestamp = (new Date()).valueOf();
+const nonceStr = randomString(20);
+const conent = "nonceStr="+nonceStr+"&openId="+openId+"&timestamp="+timestamp+masterSecret;
+const signature = CryptoJS.MD5(conent).toString();
+const appId = 10008;
 

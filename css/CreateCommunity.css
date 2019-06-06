@@ -78,7 +78,6 @@
   }
   .g-footer div{
       width:95%;
-      margin: 0 auto;
       font-size: .45rem;
   }
   .m-footer-btn{
@@ -102,4 +101,18 @@
     input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
     color: #bfbfbf; 
     } 
-    
+    .cjsqimg-div{
+        width:1.6rem;
+        height:1.6rem;
+        line-height:1.6rem;
+        margin:0 auto;
+        margin-top:1rem;
+        text-align:center;
+    }
+    .cjsqimg-text-div{
+        width:100%;
+        height:.6rem;
+        text-align:center;
+        font-size:.35rem;
+        font-weight: 600
+    }

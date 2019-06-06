@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../css/pageHeader.css">
+    <link rel="stylesheet" href="../css/allCommunity.css" />
+    <link rel="stylesheet" href="../css/iconfont/iconfont.css">
+    <script src="../js/pub/jquery_3.2.1.min.js"></script>
+    <script src="../js/pub/crypto_js.js"></script>
+    <script src="../js/pub/qianming.js"></script>
+    <script src="../js/pub/publicJS.js"></script>
+    <script type="text/javascript" src="../js/pub/rem.js"></script>
+    <title>所有社区</title>
+</head>
+
+<body>
+    <div class="mycommunity">
+        <header>
+            <div class="header_wrap">
+                <div class="header header_bg">
+                    <div class="header_back" onclick="back()">
+                        <div class="back_btn">
+                            <i class="iconfont icon-fenxiang"></i>
+                        </div>
+                    </div>
+                    <div class="header_name">
+                        <span>所有社区</span>
+                    </div>
+
+                    <div class="header_manage">
+                        <a href="" id="mine_href">
+                            <div class="next_pagebtn">
+                                <span style="color:black">发帖</span>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="header_bottom"></div>
+            </div>
+        </header>
+        <div class="searchwrap" id="searchArea">
+            <div class="search_box">
+                <div class="search_box_icon">
+                    <i class="iconfont icon-sousuo"></i>
+                </div>
+                <div class="search_box_input">
+                    搜索
+                </div>
+            </div>
+        </div>
+        <div class="minecommunity_body" id="scroll">
+            <nav class="community_navbox">
+                <div class="content" id="classBox">
+                    <div class="menu_item menu_active">
+                        <div class="menu_itembox ">
+                            <div class="menu_itemtext">
+                                国画社区
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                        <div class="menu_itembox">
+                            <div class="menu_itemtext">
+                                油画社区
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                        <div class="menu_itembox">
+                            <div class="menu_itemtext">
+                                雕刻社区
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                        <div class="menu_itembox">
+                            <div class="menu_itemtext">
+                                国画社区
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                        <div class="menu_itembox">
+                            <div class="menu_itemtext">
+                                油画社区
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                        <div class="menu_itembox">
+                            <div class="menu_itemtext">
+                                雕刻社区
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                        <div class="menu_itembox">
+                            <div class="menu_itemtext">
+                                国画社区
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                        <div class="menu_itembox">
+                            <div class="menu_itemtext">
+                                油画社区
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                        <div class="menu_itembox">
+                            <div class="menu_itemtext">
+                                雕刻社区
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                        <div class="menu_itembox">
+                            <div class="menu_itemtext">
+                                国画社区
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                        <div class="menu_itembox">
+                            <div class="menu_itemtext">
+                                油画社区
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                        <div class="menu_itembox">
+                            <div class="menu_itemtext">
+                                雕刻社区
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="community_listwrap">
+                <div class="content" id="communityBox">
+                    <div class="community_item">
+                        <div class="commuinty_img">
+                            <img src="../img/demoimg/mm.jpg" alt="">
+                        </div>
+                        <div class="community_name">
+                            <span>山东国画之家</span>
+                        </div>
+                    </div>
+                    <div class="community_item">
+                        <div class="commuinty_img">
+                            <img src="" alt="">
+                        </div>
+                        <div class="community_name">
+                            <span>山东艺术之家</span>
+                        </div>
+                    </div>
+                    <div class="community_item">
+                        <div class="commuinty_img">
+                            <img src="" alt="">
+                        </div>
+                        <div class="community_name">
+                            <span>山东油画之家</span>
+                        </div>
+                    </div>
+                    <div class="community_item">
+                        <div class="commuinty_img">
+                            <img src="" alt="">
+                        </div>
+                        <div class="community_name">
+                            <span>山东国画之家</span>
+                        </div>
+                    </div>
+                    <div class="community_item">
+                        <div class="commuinty_img">
+                            <img src="" alt="">
+                        </div>
+                        <div class="community_name">
+                            <span>山东艺术之家</span>
+                        </div>
+                    </div>
+                    <div class="community_item">
+                        <div class="commuinty_img">
+                            <img src="" alt="">
+                        </div>
+                        <div class="community_name">
+                            <span>山东油画之家</span>
+                        </div>
+                    </div>
+                    <div class="community_item">
+                        <div class="commuinty_img">
+                            <img src="" alt="">
+                        </div>
+                        <div class="community_name">
+                            <span>山东国画之家</span>
+                        </div>
+                    </div>
+                    <div class="community_item">
+                        <div class="commuinty_img">
+                            <img src="" alt="">
+                        </div>
+                        <div class="community_name">
+                            <span>山东艺术之家</span>
+                        </div>
+                    </div>
+                    <div class="community_item">
+                        <div class="commuinty_img">
+                            <img src="" alt="">
+                        </div>
+                        <div class="community_name">
+                            <span>山东油画之家</span>
+                        </div>
+                    </div>
+                    <div class="community_item">
+                        <div class="commuinty_img">
+                            <img src="" alt="">
+                        </div>
+                        <div class="community_name">
+                            <span>山东国画之家</span>
+                        </div>
+                    </div>
+                    <div class="community_item">
+                        <div class="commuinty_img">
+                            <img src="" alt="">
+                        </div>
+                        <div class="community_name">
+                            <span>山东艺术之家</span>
+                        </div>
+                    </div>
+                    <div class="community_item">
+                        <div class="commuinty_img">
+                            <img src="" alt="">
+                        </div>
+                        <div class="community_name">
+                            <span>山东油画之家</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="" id="href_true"></a>
+</body>
+<script type="text/javascript" src="../js/allCommunity.js"></script>
+
+</html>

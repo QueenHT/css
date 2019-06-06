@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/pageHeader.css">
+    <link rel="stylesheet" href="../css/foundCommunity.css">
+    <link rel="stylesheet" href="../css/iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/touchTouch/touchTouch.css">
+    <link rel="stylesheet" href="../css/weui.css">
+    <link rel="stylesheet" href="../css/jqweui.css">
+    <script src="../js/pub/jquery_3.2.1.min.js"></script>
+    <script src="../js/pub/rem.js"></script>
+    <script src="../js/pub/crypto_js.js"></script>
+    <script src="../js/pub/qianming.js"></script>
+    <script src="../js/pub/publicJS.js"></script>
+    <script src="../js/touchJs/touchTouch.jquery.js"></script>
+    <title>发现社区</title>
+</head>
+
+<body>
+    <div class="foundcommumity">
+        <div class="header_wrap">
+            <div class="header header_bg">
+                <div class="header_back" onclick="toMineCommunity()">
+                    <div class="back_btn">
+                       <span>我的社区</span>
+                    </div>
+                </div>
+                <div class="header_name">
+                    <span>发现社区</span>
+                </div>
+
+                <div class="header_manage">
+                    <a href="" id="found_href">
+                        <div class="next_pagebtn">
+                            <span style="color:#fff">发帖</span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <div class="community_scroll" id="scroll" >
+            <div class="scroll_wrap">
+                <div class="weui-pull-to-refresh__layer">
+                    <div class='weui-pull-to-refresh__arrow'></div>
+                    <div class='weui-pull-to-refresh__preloader'></div>
+                    <div class="down">下拉刷新</div>
+                    <div class="up">释放刷新</div>
+                    <div class="refresh">正在刷新</div>
+                </div>
+                <div>
+                <div class="searchwrap" id="searchArea">
+                    <div class="search_box">
+                        <div class="search_box_icon">
+                            <i class="iconfont icon-sousuo"></i>
+                        </div>
+                        <div class="search_box_input">
+                            搜索
+                        </div>
+                    </div>
+                </div>
+                <div class="hot_classfiywrap">
+                    <div class="hot_title">
+                        <p>热门分类</p>
+                    </div>
+                    <div class="hot_menu">
+                        <div class="hot_menu_box">
+                            <div class="hot_menu_item hot_menu_active">
+                                我加入的
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="all_label">
+                        <div>
+                            <span>全部</span><span id="hot_menu_count"></span>
+                            <i class="iconfont icon-xiangyoulabel" style="font-size:14px;color: #cccccc"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- 分割线 -->
+                <div class="split_line"></div>
+                <div class="community_main" >
+                    <div class="community_main_title">
+                        <p>社区贴子</p>
+                    </div>
+                    <div class="community_body">
+                        <!-- <div>
+                            <div class="community_item">
+                                <div class="community_item_top">
+                                    <div class=" community_item_head">
+                                        <img src="../img/demoimg/mm.jpg" />
+                                    </div>
+                                    <div style="flex:1;">
+                                        <div class="community_item_username">
+                                            <div><span>Mr Siyunxin</span></div>
+                                            <div>
+                                                <div class="community_item_time"><span>五分钟前</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="community_item_zuanfa"><span>已转发</span></div>
+                                    </div>
+
+                                </div>
+                                <div class="community_item_center">
+
+                                    <div class="community_item_content"><span>《清明上河图》</span></div>
+                                    <div class="community_item_imgs" id="thumbs">
+                                        <div>
+                                            <a
+                                                href="https://ss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=455610afdfc8a786a12a4c0e5708c9c7/5bafa40f4bfbfbedcb2d862a76f0f736afc31f6a.jpg">
+                                                <img src="https://ss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=455610afdfc8a786a12a4c0e5708c9c7/5bafa40f4bfbfbedcb2d862a76f0f736afc31f6a.jpg"
+                                                    alt="">
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a
+                                                href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556099898615&di=b6137c18ac6389552cfdc12b2cecbf25&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201702%2F15%2F20170215191311_HaiRT.jpeg">
+                                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556099898615&di=b6137c18ac6389552cfdc12b2cecbf25&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201702%2F15%2F20170215191311_HaiRT.jpeg"
+                                                    alt="">
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a
+                                                href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3431805394,1208117131&fm=26&gp=0.jpg">
+                                                <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3431805394,1208117131&fm=26&gp=0.jpg"
+                                                    alt="">
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a
+                                                href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3431805394,1208117131&fm=26&gp=0.jpg">
+                                                <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3431805394,1208117131&fm=26&gp=0.jpg"
+                                                    alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="community_item_operate">
+                                <div class="operate_box">
+                                    <div>
+                                        <span class="iconfont icon-xin operate_icon" onclick="handleFavorite()"></span>
+                                        <span class="operate_count">1</span>
+                                    </div>
+                                    <div>
+                                        <span class="iconfont icon-duihua operate_icon"
+                                            onclick="handleComment()"></span>
+                                        <span class="operate_count">2</span>
+                                    </div>
+                                    <div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="split_line"></div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="weui-loadmore" id="wait">
+                        <i class="weui-loading"></i>
+                        <span class="weui-loadmore__tips">正在加载</span>
+                    </div>
+                    <div class="weui-loadmore weui-loadmore_line" id="noMore">
+                        <span class="weui-loadmore__tips">没有更多</span>
+                </div>
+            </div>
+                <div class="mycommunity_center" style="display:none">
+                        <div class="content">
+                            <div class="mycomunity_item">
+                                <div class="mycomunity_imgbox">
+                                    <div class="mycomunity_usercount">
+                                        <span>121314</span>人
+                                    </div>
+                                    <img src="" alt="">
+                                </div>
+                                <div class="community_name"><span>社区名称</span></div>
+                            </div>
+                            <div class="mycomunity_item">
+                                <div class="mycomunity_imgbox">
+                                    <div class="mycomunity_usercount">
+                                        <span>121314</span>人
+                                    </div>
+                                    <img src="" alt="">
+                                </div>
+                                <div class="community_name"><span>社区名称</span></div>
+                            </div>
+                            <div class="mycomunity_item">
+                                <div class="mycomunity_imgbox">
+                                    <div class="mycomunity_usercount">
+                                        <span>121314</span>人
+                                    </div>
+                                    <img src="" alt="">
+                                </div>
+                                <div class="community_name"><span>社区名称</span></div>
+                            </div>
+                            <div class="mycomunity_item">
+                                <div class="mycomunity_imgbox">
+                                    <div class="mycomunity_usercount">
+                                        <span>121314</span>人
+                                    </div>
+                                    <img src="" alt="">
+                                </div>
+                                <div class="community_name"><span>社区名称</span></div>
+                            </div>
+                            <div class="mycomunity_item">
+                                <div class="mycomunity_imgbox">
+                                    <div class="mycomunity_usercount">
+                                        <span>121314</span>人
+                                    </div>
+                                    <img src="" alt="">
+                                </div>
+                                <div class="community_name"><span>社区名称</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="mycommunity_footer" style="display: none">
+                        <div class="mycommunity_emptydata">
+                            <div class="default_imgbox">
+                                <img src="../img/dbm_images/dbm_default.png" alt="大斑马默认图">
+                            </div>
+                            <div>
+                                <p>还没有内容</p>
+                                <p>去热门推荐看看吧</p>
+                            </div>
+                        </div>
+                    </footer>
+            </div>
+            
+        </div>
+
+        <!-- 我加入的没有数据 -->
+        
+    </div>
+        <a id="href_true" href=""></a>
+</body>
+<script type="text/javascript" src="../js/pub/jquery_weui.js"></script>
+<script type="text/javascript" src="../js/foundCommunity.js"></script>
+
+<script>
+   
+      
+    
+</script>
+
+</html>

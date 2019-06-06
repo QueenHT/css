@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/pageHeader.css">
+    <link rel="stylesheet" href="../css/iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/jqweui.css">
+    <link rel="stylesheet" href="../css/weui.css">
+    <link rel="stylesheet" href="../css/addAddress.css">
+
+    <script src="../js/pub/jquery_3.2.1.min.js"></script>
+    <script src="../js/pub/rem.js"></script>
+    <script src="../js/pub/crypto_js.js"></script>
+    <script src="../js/pub/qianming.js"></script>
+    <script src="../js/pub/publicJS.js"></script>
+  
+</head>
+<body onclick="comfirmcity()">
+    <div>
+        <div class="header_wrap" style=" border-bottom: 1px solid #c0c0c0;">
+            <div class="header">
+                <div class="header_back"  onclick="back()">
+             
+                        <div class="back_btn">
+                            <i class="iconfont icon-fenxiang"></i>
+                        </div>
+              
+                </div>
+    
+                <div class="header_name">
+                    <span>新增地址</span>
+                </div>
+                <div class="header_manage" onclick="handleMyCommunity()">
+                </div>
+            </div>
+        </div>
+        <div style="background: white">
+            <div class="part">
+                <div class="part-qian">姓名</div>
+                <input id="name" class="part-hou" placeholder="请输入收件人姓名">
+            </div>
+            <div class="part">
+                <div class="part-qian">手机</div>
+                <input id="phone" class="part-hou" placeholder="请输入手机号" type="number">
+            </div>
+            <div class="part">
+                <div class="part-qian">省份</div>
+                <input style="border: 0px;font-size: .38rem;" type="text" placeholder="请选择省" id='picker' />
+            </div>
+            <div class="part">
+                <div class="part-qian">城市</div>
+                <input style="border: 0px;font-size: .38rem;" type="text" placeholder="请选择市" id='picker1' />
+            </div>
+            <div class="part">
+                <div class="part-qian">县区</div>
+                <input style="border: 0px;font-size: .38rem;" type="text" placeholder="请选择县区" id='picker2' />
+            </div>
+            <div class="part">
+                <div class="part-qian" style="width: 1.9rem;margin-left: 0.4rem;margin-right: .1rem;">详细地址</div>
+                <input id="address" class="part-hou" style="width: 7rem" placeholder="请输入详细地址">
+            </div>
+        </div>
+        <div style="width: 88%;margin: 0 auto">
+            <div style="width:100%;text-align: center;height: 1rem;font-size: .42rem;background:#389bff;color: white;border-radius: 60px ">
+                <div onclick="confirm()" id="confirm" style="line-height: 1rem;margin-top: .4rem;">确定</div>
+            </div>
+        </div>
+        <a id="href_true" style="display: none;"></a>
+    </div>
+    <script src="../js/pub/jquery_weui.js"></script>
+    <script type="text/javascript">
+        function data_href(url) {
+            $("#href_true").attr("href",url);//传入参数  
+            document.getElementById("href_true").click();//模拟点击  
+        }
+        var shengvalue;
+        var shivalue;
+        var xianvalue;
+        var sheng = [];
+        var shengall = {};
+        var shiall = {};
+        var xianall ={};
+        var shengId;
+        var shiId;
+        var xianId;
+        var picker1 ={
+            title: "",
+            cols: [
+                {
+                    textAlign: 'center',
+                    values:[]
+                }
+            ]
+        }
+        var picker2 ={
+            title: "",
+            cols: [
+                {
+                    textAlign: 'center',
+                    values:[]
+                }
+            ]
+        }
+     
+        function back(){
+            if(getQueryVariable('from')==1){
+                if (checkSystem()) {
+                    window.location.href=`./chooseAddress.html?openId=${openId}&masterSecret=${masterSecret}`
+                } else {
+                    data_href(`./chooseAddress.html?openId=${openId}&masterSecret=${masterSecret}`)
+                }
+            }else{
+                if (checkSystem()) {
+                    window.location.href=`./manageAddress.html?openId=${openId}&masterSecret=${masterSecret}`
+                } else {
+                    data_href(`./manageAddress.html?openId=${openId}&masterSecret=${masterSecret}`)
+                }
+            }
+        }
+        function getQueryVariable(variable)
+        {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i=0;i<vars.length;i++) {
+                var pair = vars[i].split("=");
+                if(pair[0] == variable){return pair[1];}
+            }
+            return(false);
+        }
+        $.ajax({
+            //提交数据的类型 POST GET
+            crossDomain: true,
+            type:"GET",
+            jsonp: "callback",
+            jsonpCallback:"successCallback",
+            //提交的网址
+            url:API+"/areaCode/queryAreaCode.shtml",
+            // url:"http://172.20.188.191:8111/api/userInfo/login.shtml",
+            //提交的数据
+            data:{
+            },
+            //成功返回之后调用的函数
+            success:function(data){
+                shengall = data.list;
+                data.list.forEach(function (item,index) {
+                    sheng.push(item.areaName)
+                })
+            }   ,
+            //调用出错执行的函数
+            error: function(){
+                //请求出错处理
+            }
+        });
+        $("#picker").picker({
+            title: "",
+            cols: [
+                {
+                    textAlign: 'center',
+                    values: sheng
+                }
+            ]
+        });
+        $("#picker1").picker(picker1);
+        $("#picker2").picker(picker2);
+        document.getElementById('picker1').onclick=function () {
+
+        }
+        document.getElementById('picker').onchange=function () {
+            document.getElementById('picker1').value = "";
+            document.getElementById('picker2').value = ""
+        }
+        document.getElementById('picker1').onchange=function () {
+            document.getElementById('picker2').value = ""
+        }
+        function comfirmcity() {
+            shengvalue = document.getElementById('picker').value
+            shivalue = document.getElementById('picker1').value
+            xianvalue = document.getElementById('picker2').value
+            if(shengvalue&&!shivalue){
+                shengall.forEach(function (item) {
+                    if(item.areaName==shengvalue){
+                        shengId = item.areaCode
+                        $.ajax({
+                            //提交数据的类型 POST GET
+                            crossDomain: true,
+                            type:"GET",
+                            jsonp: "callback",
+                            jsonpCallback:"successCallback",
+                            //提交的网址
+                            url:API+"/areaCode/queryAreaCode.shtml?fatherCode="+item.areaCode,
+                            // url:"http://172.20.188.191:8111/api/userInfo/login.shtml",
+                            //提交的数据
+                            data:{
+                            },
+                            headers: {'nonceStr':nonceStr,'openId':openId,'signature':signature,'timestamp':timestamp,},
+                            //成功返回之后调用的函数
+                            success:function(data){
+                                var s = []
+                                shiall = data.list;
+                                data.list.forEach(function (item,index) {
+                                    s.push(item.areaName)
+                                })
+                                picker1.cols[0].values = s
+                            }   ,
+                            //调用出错执行的函数
+                            error: function(){
+                                //请求出错处理
+                            }
+                        });
+
+                    }
+                })
+            }else if (shivalue&&!xianvalue){
+                shiall.forEach(function (item) {
+                    if(item.areaName==shivalue){
+                        shiId = item.areaCode
+                        $.ajax({
+                            //提交数据的类型 POST GET
+                            crossDomain: true,
+                            type:"GET",
+                            jsonp: "callback",
+                            jsonpCallback:"successCallback",
+                            //提交的网址
+                            url:API+"/areaCode/queryAreaCode.shtml?fatherCode="+item.areaCode,
+                            // url:"http://172.20.188.191:8111/api/userInfo/login.shtml",
+                            //提交的数据
+                            data:{
+                            },
+                            headers: {'nonceStr':nonceStr,'openId':openId,'signature':signature,'timestamp':timestamp,},
+                            //成功返回之后调用的函数
+                            success:function(data){
+                                var s = []
+                                xianall = data.list
+                                data.list.forEach(function (item,index) {
+                                    s.push(item.areaName)
+                                })
+                                picker2.cols[0].values = s
+                            }   ,
+                            //调用出错执行的函数
+                            error: function(){
+                                //请求出错处理
+                            }
+                        });
+
+                    }
+                })
+            }else  if(xianvalue){
+                xianall.forEach(function (item) {
+                    if(item.areaName==xianvalue){
+                        xianId = item.areaCode
+                    }
+                })
+            }
+        }
+        function confirm() {
+            var name;
+            var phone;
+            var address;
+            var iszhixia = false;
+            name = document.getElementById('name').value
+            phone = document.getElementById('phone').value
+            address = document.getElementById('address').value
+            if(shengvalue=="香港"||shengvalue=="澳门"||shengvalue=="台湾省"){
+                iszhixia = true
+            }
+            if(!name){
+                $.toast("姓名不能为空", "text");
+            }else if(!phone){
+                $.toast("手机号不能为空", "text");
+            }else if(!address){
+                $.toast("详细地址不能为空", "text");
+            }else if(!shengvalue) {
+                $.toast("省份不能为空", "text");
+            }else if(!shivalue && iszhixia == false ){
+                $.toast("城市不能为空", "text");
+            }else if(!xianvalue && iszhixia == false){
+                $.toast("县区不能为空", "text");
+            }else {
+                $.showLoading('正在提交')
+                $.ajax({
+                    //提交数据的类型 POST GET
+                    crossDomain: true,
+                    type:"GET",
+                    //提交的网址
+                    url:API+"/address/addUserPostAddress.shtml",
+                    // url:"http://172.20.188.191:8111/api/userInfo/login.shtml",
+                    //提交的数据
+                    data:{
+                        provinceCode:shengId,
+                        cityCode:shiId,
+                        countyCode:xianId,
+                        detailAddress:address,
+                        name:name,
+                        msisdn:phone
+                    },
+                    headers: {'nonceStr':nonceStr,'openId':openId,'signature':signature,'timestamp':timestamp,},
+                    //返回数据的格式
+                    //成功返回之后调用的函数
+                    success:function(data){
+                        $.hideLoading()
+                        $.toast("已成功添加地址", "text");
+                        if(getQueryVariable('from')==1){
+                            if (checkSystem()) {
+                                setTimeout(function () {
+                                    window.location.href=`./chooseAddress.html?openId=${openId}&masterSecret=${masterSecret}`
+                                },1000)
+                            } else {
+                                setTimeout(function () {
+                                    data_href(`./chooseAddress.html?openId=${openId}&masterSecret=${masterSecret}`)
+                                },1000)
+                            }
+                        }else{
+                            if (checkSystem()) {
+                                setTimeout(function () {
+                                    window.location.href=`./manageAddress.html?openId=${openId}&masterSecret=${masterSecret}`
+                                },1000)
+                            } else {
+                                setTimeout(function () {
+                                    data_href(`./manageAddress.html?openId=${openId}&masterSecret=${masterSecret}`)
+                                },1000)
+                            }
+                        }
+                    } ,
+                    //调用出错执行的函数
+                    error: function(){
+                        //请求出错处理
+                        $.hideLoading()
+                        $.toast("提交失败", "text");
+                    }
+                });
+            }
+        }
+        function checkSystem(){
+            var u = navigator.userAgent, app = navigator.appVersion;
+            var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+            var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+            if (isAndroid) {
+                //这个是安卓操作系统
+                return 0
+            }
+            if (isIOS) {
+                //这个是ios操作系统
+                return 1
+            }
+        }
+        $('#picker').click(function () {
+            document.activeElement.blur();
+        })
+        $('#picker1').click(function () {
+            document.activeElement.blur();
+        })
+        $('#picker2').click(function () {
+            document.activeElement.blur();
+        })
+    </script>
+</body>
+</html>

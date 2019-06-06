@@ -42,9 +42,9 @@ a {
     transform: scaleY(0.5) 
 }
 .header_name{
-    width: 55%;
+    width: 50%;
     height: 100%;
-    font-size: .5rem;
+    font-size: .46rem;
     font-weight: bold;
 }
 .header_back{
@@ -54,6 +54,7 @@ a {
 }
 .back_btn{
     padding-left:.4rem;
+    font-size: .4rem;
 }
 .next_pagebtn{
     padding-right: .4rem

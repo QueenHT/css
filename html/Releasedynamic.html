@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/pageHeader.css">
+    <link rel="stylesheet" href="../css/iconfont/iconfont.css">   
+    <link rel="stylesheet" href="../css/jqweui.css">
+    <link rel="stylesheet" href="../css/weui.css">
+    <link rel="stylesheet" href="../css/addAddress.css">
+    <link rel="stylesheet" href="../css/postmessage.css">
+    <script src="../js/pub/crypto_js.js"></script>
+    <script src="../js/pub/jquery_3.2.1.min.js"></script>
+    <script src="../js/pub/jquery_weui.js"></script>
+    <script src="../js/pub/rem.js"></script>
+    <script src="../js/pub/qianming.js"></script>
+    <script src="../js/pub/publicJS.js"></script>
+    <script src="../js/pub/jquery-from.js"></script>
+    <title>发布动态</title>
+</head>
+
+<body  style="background: #fff;">
+    <div class="header_wrap">
+        <div class="header">
+
+            <div class="header_back">
+                    <div class="back_btn" onclick="back()">
+                        <i class="iconfont icon-fenxiang"></i>
+                    </div>
+            </div>
+
+            <div class="header_name">
+                <span>发布动态</span>
+            </div>
+            <div class="header_manage" onclick="handleMyCommunity()">
+                <div class="next_pagebtn">
+                    <!-- <span>发帖</span> -->
+                </div>
+            </div>
+        </div>
+        <div class="header_bottom"></div>
+    </div>
+   <div class="m-content">
+    <div class="g-title">
+        <div class="fl-tex">
+            动态标题:
+        </div>
+        <div class="fl-title-inp">
+            <input type="text" name="" id="titleInp">
+        </div>
+    </div>
+    <div class="g-header-fl">
+        <div class="fl-tex">
+            动态类型:
+        </div>
+        <!-- <div class="fl-tz-div" > -->
+            <div class="select-div" >
+                <div class="select-inp">
+                    <input type="text" id='picker' >
+                    <span  id="selectSpan" style="position: absolute;right:5%;top: 0;">去选择</span>
+                </div>
+                
+                <div style="margin-right:.2rem;">
+                       <i class="iconfont icon-linecar105"></i>
+                </div>
+            </div>
+        <!-- </div> -->
+    </div>
+    <div class="header_bottom"></div>
+
+
+    <div class="m-body">
+        <textarea id="textArea" maxlength="1000" oninput="longsize(value)"
+            onfocus="document.getElementById('introTxt').style.display='none'" onblur="textareablur(value)">
+        </textarea>
+        <div id="introTxt" class="abnormal" onclick="focusTextarea()">写下你想写的.....</div>
+        <span id="g-long-text">
+            最多1000字
+        </span>
+    </div>
+
+    <div class="m-img" id="m-img">
+        <!-- <div class="img-upload">
+                <div class="img-show" >
+                    <img style="width: 100%;height: 100%; border-radius: .2rem;" src="../img/info.jpg">
+                  <p class="img-close" @click.stop="fileDel(index)">
+                    <img style="width: 100%;height: 100%;" src="../img/del.png" alt>
+                  </p>
+                </div>
+              </div> -->
+
+        <div class="fujian" id="fujian" onclick="clickMenu1()">
+            <div style="width:1.6rem;height:1.6rem;margin:0 auto;text-align:center;">
+                <img style="width:40%;padding-top:0.6rem;" src="../img/add.png" alt>
+            </div>
+            <div style="width:100%;height:.6rem;text-align:center">照片</div>
+
+
+        </div>
+
+    </div>
+    <form  id="picform" method="post" name="f_upload" enctype="multipart/form-data">
+        <input  type="file" name="file" id="upload_file" accept="image/*" onchange="fileChange(event)"
+            style="display: none" multiple>
+        <br>
+        <!--<input type="file" name="upload" id="upload_file2" accept='image/*' capture="camera" @change="fileChange($event)" style="display: none"><br>-->
+        <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
+    </form>
+    <div class="m-bq">
+        <div class="g-bq-title">给个标签</div>
+        <div class="g-bq-div">
+            <div><input type="text" placeholder="标签1" onblur="labelfn(id,value)" id="labelInp1"></div>
+            <div><input type="text" placeholder="标签2" onblur="labelfn(id,value)"  id="labelInp2"></div>
+            <div><input type="text" placeholder="标签3" onblur="labelfn(id,value)"  id="labelInp3" ></div>
+        </div>
+    </div>
+    <div class="m-button-div">
+        <div class="g-button">发布</div>
+    </div>
+   </div>
+    <a id="href_true" style="display: none;"></a>
+</body>
+<script src="../js/pub/jquery_weui.js"></script>
+<script src="../js/Releasedynamic.js"></script>
+
+</html>

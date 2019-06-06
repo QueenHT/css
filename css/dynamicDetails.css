@@ -100,15 +100,18 @@
     bottom: 0rem;   
     display: flex;
     justify-content:flex-start;
+    align-items: center;
+    text-align: center;
 }
 .m-footer>div{
-    width: 20%;
+    width: 10%;
     margin-left: 5%;
 }
 .g-text{
     height: .8rem;
     line-height:.8rem;
     font-size: .4rem;
+
 }
 .g-icon{
     margin-top: .2rem;

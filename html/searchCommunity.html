@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../css/iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/jqweui.css">
+    <link rel="stylesheet" href="../css/searchCommunity.css">
+    <script src="../js/pub/jquery_3.2.1.min.js"></script>
+    <script src="../js/pub/jquery_weui.js"></script>
+    <script src="../js/pub/rem.js"></script>
+    <script src="../js/pub/crypto_js.js"></script>
+    <script src="../js/pub/qianming.js"></script>
+    <script src="../js/pub/publicJS.js"></script>
+    <title>选择分类</title>
+</head>
+<body>
+    <div class="header_inp">
+        <div class="search_back" onclick="back()">
+            <span class="iconfont icon-fenxiang"></span>
+        </div>
+        <div class="input-box">
+            <div class="g-i-img">
+                <img src="../img/ss.png" alt="" srcset="">
+            </div>
+            <div class="g-inp-div">
+                <input id="ssinput" type="text" placeholder="搜索" autocomplete="on" onblur="inpblur(value)" onfocus="onFocus()">
+            </div>
+        </div>
+        <div class="search-cancel" onclick="onCancel()">
+              <div class="cancel-btn">
+                  取消
+              </div>  
+        </div>
+    </div>
+    <div class="search-body">
+        
+    </div>
+    <a id="href_true" style="display: none;"></a>
+
+</body>
+<script src="../js/searchCommunity.js"></script>
+
+</html>

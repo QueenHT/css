@@ -33,4 +33,25 @@ function data_href(url) {
     $("#href_true").attr("href", url); //传入参数
     document.getElementById("href_true").click(); //模拟点击
   }
+    // 将url中得到的中文参数转译
+  function getParams(key) {
+    var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)"); 
+   //如果地址栏中出现中文则进行编码    
+    var r = encodeURI(window.location.search).substr(1).match(reg);  
+    if (r != null) {  
+        //将中文编码的字符重新变成中文
+        return decodeURI(unescape(r[2]));  
+    }  
+    return "";  
+  };
+
+  function checkImageUrl(value){
+    var url=document.getElementById("url").value;
+    var reg=/^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
+    if(!reg.test(url)){
+       return IMGAPI + value 
+    }else{
+       return value 
+    }
+  }
    

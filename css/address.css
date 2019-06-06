@@ -1,0 +1,271 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background: #F5F5F5;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: #000
+}
+
+* {
+    margin: 0;
+    padding: 0
+}
+
+.managerwrap {
+    width: 100%;
+    height: 100%;
+}
+
+.manageheaderbox {
+    height: 1.2rem;
+    line-height: 1.2rem;
+    text-align: center;
+    position: relative;
+    background: #fff;
+    z-index: 1;
+}
+
+.manageheaderbox div {
+    font-size: .5rem;
+    font-weight: 600;
+    font-family: '微软雅黑';
+}
+
+.manageheaderbox img {
+    position: absolute;
+    left: .1rem;
+    top: .2rem;
+    width: .8rem;
+    /* margin: .2rem 0 0 .1rem; */
+}
+
+.address {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.address::-webkit-scrollbar{
+    display: none
+}
+
+.address-container {
+    width: 100%;
+    font-size: .45rem;
+    background: #EEEEEE;
+    padding-top: .1px;
+    margin-bottom: .2rem;
+
+}
+
+.address-box {
+    width: 100%;
+    background: #fff;
+    margin-top: .36rem;
+    margin-bottom: .2rem;
+}
+
+.address-item {
+    width: 100%;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    margin-left: .2rem;
+    border-bottom: 1px solid #EEEEEE
+}
+
+.receive-info {
+    display: inline-block;
+
+}
+
+.receive-edit {
+    display: inline-block;
+    float: right;
+    margin-right: .2rem
+}
+
+.addres-manger {
+    height: 1.6rem;
+}
+
+.address-info {
+    width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: .8rem;
+    display: inline-block;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    vertical-align: middle
+}
+
+.itemname {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: .8rem;
+}
+
+.address-btnbox {
+    width: 100%;
+    margin-top: .3rem;
+    padding-top: .1px;
+}
+
+.add-address {
+    width: 90%;
+    height: 1rem;
+    line-height: 1rem;
+    font-size: .45rem;
+    text-align: center;
+    color: #fff;
+    background: #389bff;
+    margin: 1rem auto 0 auto;
+    border-radius: 1rem;
+
+}
+
+.address-radio {
+    /* display: inline-block; */
+    width: 40px;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+    margin-top: .4rem;
+    float: right;
+}
+.addconetent{
+    width: 100%;
+    /* height: 100%; */
+    overflow-y: hidden
+}
+
+input[type="radio"] {
+    width: .5rem;
+    height: .5rem;
+    opacity: 0;
+}
+
+label {
+    position: absolute;
+    left: .1rem;
+    top: .2rem;
+    width: .5rem;
+    height: .5rem;
+    border-radius: 50%;
+    border: 1px solid #999;
+}
+
+/*设置选中的input的样式*/
+/* + 是兄弟选择器,获取选中后的label元素*/
+input:checked+label {
+    background-color: #389bff;
+    border: 1px solid #389bff;
+}
+
+input:checked+label::after {
+    position: absolute;
+    content: "";
+    width: .1rem;
+    height: .25rem;
+    top: .05rem;
+    left: .16rem;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg)
+}
+
+.tophr {
+    width: 120%;
+    height: 2px;
+    overflow: hidden;
+}
+
+.address-null {
+    width: 100%;
+    height: 4rem;
+    color: #AAAAAA;
+    font-size: .5rem;
+    text-align: center;
+    line-height: 4rem;
+    display: none;
+}
+
+/* 分割线 */
+.littdivcss {
+    width: 35px;
+    height: 2px;
+    transform: skewX(30deg);
+    float: left;
+    display: inline-block;
+
+}
+
+.littdivpaddingcss {
+    width: 3px;
+    height: 2px;
+    transform: skewX(30deg);
+    float: left;
+    display: inline-block;
+}
+
+.littdivcss:nth-child(4n+1) {
+    background: red;
+}
+
+.littdivcss:nth-child(4n+3) {
+    background: blue;
+}
+
+.wrap-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, .4);
+    z-index: 999;
+}
+
+.dialog {
+    position: relative;
+    margin: 15% auto;
+    width: 300px;
+    background-color: #FFFFFF;
+}
+
+.dialog .dialog-header {
+    height: 20px;
+    padding: 10px;
+    background-color: #389bff;
+}
+
+.dialog .dialog-body {
+    height: 30px;
+    padding: 20px;
+}
+
+.dialog .dialog-footer {
+    padding: 8px;
+    background-color: whitesmoke;
+}
+
+.btn {
+    width: 70px;
+    padding: 2px;
+}
+
+.hide {
+    display: none;
+}
+
+.ml50 {
+    margin-left: 50px;
+}

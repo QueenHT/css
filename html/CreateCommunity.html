@@ -1,99 +1,214 @@
-
-<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=yes">
     <link rel="stylesheet" href="../css/pageHeader.css">
     <link rel="stylesheet" href="../css/CreateCommunity.css" />
     <link rel="stylesheet" href="../css/iconfont/iconfont.css">
     <link rel="stylesheet" href="../css/jqweui.css">
     <link rel="stylesheet" href="../css/weui.css">
     <link rel="stylesheet" href="../css/addAddress.css">
+    <link rel="stylesheet" type="text/css" href="../css/cropper.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/mui.min.css">
     <script src="../js/pub/jquery_3.2.1.min.js"></script>
     <script src="../js/pub/crypto_js.js"></script>
     <script src="../js/pub/qianming.js"></script>
     <script src="../js/pub/publicJS.js"></script>
     <script type="text/javascript" src="../js/pub/rem.js"></script>
-    <title>创建社区</title>
+    <!-- <script type="text/javascript" src="js/lrz.mobile.min.js"></script> -->
+    <script type="text/javascript" src="../dist/lrz.all.bundle.js"></script>
+    <script type="text/javascript" src="../js/ImageCipping/cropper.min.js"></script>
+  
 </head>
 
-<body style="background: #fff;">
-    <div class="mycommunity">
-        <header>
-            <div class="header_wrap">
-                <div class="header header_bg">
-                    <div class="header_back" onclick="back()">
-                        <div class="back_btn">
-                            <i class="iconfont icon-fenxiang"></i>
-                        </div>
-                    </div>
-                    <div class="header_name">
-                        <span>创建社区</span>
-                    </div>
-                    <div class="header_manage">
-                        <a href="" id="all_href">
-                            <div class="next_pagebtn">
-                                <!-- <span style="color:black">所有社区</span> -->
+<body>
+    <div id="showResult">
+            <header>
+                    <div class="header_wrap">
+                        <div class="header header_bg">
+                            <div class="header_back" onclick="back()">
+                                <div class="back_btn">
+                                    <i class="iconfont icon-fenxiang"></i>
+                                </div>
                             </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="header_bottom"></div>
-            </div>
-        </header>
-        <div class="body">
-          <div class="g-top"> 
-              <div class="m-input"><input type="text" placeholder="社区名称"></div>
-              <div class="m-select">
-                 <div class="select-div" >
-                     <div class="select-inp">
-                         <input type="text" id='picker' placeholder="类型">
-                     </div>
-                     <div style="margin-right:.2rem;">
-                            <i class="iconfont icon-linecar105"></i>
-                     </div>
-                 </div>
-                 
-               </div>
-          </div>
-          <div class="g-img">
-                <div class="fujian" id="Communityicon" onclick="clickMenu1()" style="color: #000;">
-                        <div style="width:1.6rem;height:1.6rem;line-height:1.6rem;margin:0 auto;margin-top:1rem;text-align:center;">
-                                <i class="iconfont icon-shangchuantupian"></i>
-                        </div>
-                        <div style="width:100%;height:.6rem;text-align:center;font-size:.35rem;font-weight: 600">社区图标</div>
-                    </div>
-                    <div class="fujian" id="Backgroundicon" onclick="clickMenu2()" style="color: #000;">
-                            <div style="width:1.6rem;height:1.6rem;line-height:1.6rem;margin:0 auto;margin-top:1rem;text-align:center;">
-                                    <i class="iconfont icon-shangchuantupian"></i>
+                            <div class="header_name">
+                                <span>创建社区</span>
                             </div>
-                            <div style="width:100%;height:.6rem;text-align:center;font-size:.35rem;font-weight: 600">背景图片</div>
+                            <div class="header_manage">
+                                <a href="" id="all_href">
+                                    <div class="next_pagebtn">
+                                        <!-- <span style="color:black">所有社区</span> -->
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                <div  style="display: none;">
-                        <input name="evidence" id="upload_file" onchange="uploadImg(this,'Communityicon')" type="file"/>
-                </div>
-                <div  style="display: none;">
-                        <input name="evidence" id="upload_file2" onchange="uploadImg(this,'Backgroundicon')" type="file"/>
-                </div>
-                       
-     
-        </div>
-      
-     
+                        <!-- <div class="header_bottom"></div> -->
+                    </div>
+                </header>
+                <div class="body"  id="showResult">
+                        <div class="g-top"> 
+                            <div class="m-input"><input type="text" id="newsTtile" placeholder="社区名称"></div>
+                            <div class="m-select">
+                               <div class="select-div" >
+                                   <div class="select-inp">
+                                       <input type="text" id='picker' placeholder="类型">
+                                   </div>
+                                   <div style="margin-right:.2rem;">
+                                          <i class="iconfont icon-linecar105"></i>
+                                   </div>
+                               </div>
+                               
+                             </div>
+                        </div>
+                        <div class="g-img">
+                              <div class="fujian" id="Communityicon" onclick="clickMenu1()" style="color: #000;">
+                                      <div  class="cjsqimg-div">
+                                              <i class="iconfont icon-shangchuantupian"></i>
+                                      </div>
+                                      <div  class="cjsqimg-text-div">社区图标</div>
+                                  </div>
+                                  <div class="fujian" id="Backgroundicon" onclick="clickMenu2()" style="color: #000;">
+                                          <div  class="cjsqimg-div">
+                                                  <i class="iconfont icon-shangchuantupian"></i>
+                                          </div>
+                                          <div  class="cjsqimg-text-div">背景图片</div>
+                                      </div>
+                              <div  style="display: none;">
+                                      <input name="evidence" id="upload_file"  type="file"/>
+                              </div>                                    
+                   
+                      </div>
+                    
+                      <div class="g-footer">
+                          <div>
+                              <div class="m-footer-btn" >
+                                  创建社区
+                              </div>
+                          </div>
+                      </div>
+                  </div>
     </div>
-    <div class="g-footer">
-            <div>
-                <div class="m-footer-btn">
-                    创建社区
-                </div>
-            </div>
+    <div id="showEdit" style="display: none;width:100%;height: 100%;position: absolute;top:0;left: 0;z-index: 9;">
+        <div style="width:100%;position: absolute;top:10px;left:0px;">
+            <button class="mui-btn" data-mui-style="fab" id='cancleBtn' style="margin-left: 10px;">取消</button>
+            <button class="mui-btn" data-mui-style="fab" data-mui-color="primary" id='confirmBtn' style="float:right;margin-right: 10px;">确定</button>
         </div>
-    <a href="" id="href_true"></a>
+        <div id="report">
+            <!-- <img src="mei.jpg" style="width: 300px;height:300px"> -->
+        </div>
+    </div>
 </body>
 <script src="../js/pub/jquery_weui.js"></script>
 <script type="text/javascript" src="../js/CreateCommunity.js"></script>
+<script type="text/javascript">
+var indextab=1;
+// 用来表示当前点击上传的是背景图片还是社区图片 1代表社区图标 
+var CommunitySrc;
+//用来保存社区图标的src
+var BackgroundSrc;
+// 用来保存背景图片的src
+var Communityicon='';
+//用来保存社区图标的处理后的src
+var Backgroundicon='';
+// 用来保存背景图片处理后的src
+var newsTitle='';
+  // 社区名称
+var type=0;
+// 社区类型
+    $(function() {
+        function toFixed2(num) {
+            return parseFloat(+num.toFixed(2));
+        }
+        $('#cancleBtn').on('click', function() {
+            $("#showEdit").fadeOut();
+            $('#showResult').fadeIn();
+        });
+        $('#confirmBtn').on('click', function() {
+            // 处理图片url事件
+            if(indextab==1){        
+                manageCommunityurl()
+                    }else{
+              manageBackgroundurl()                 
+                    }
+            $("#showEdit").fadeOut();
+            var $image = $('#report > img');
+            var dataURL = $image.cropper("getCroppedCanvas");
+            var imgurl = dataURL.toDataURL("image/jpeg", 0.5);               
+            if(indextab===1){
+                $("#Communityicon").html('<img src="' +  imgurl + '" style="width: 100%;height:100%">');
+            }else{
+                $("#Backgroundicon").html('<img src="' +  imgurl + '" style="width: 100%;height:100%">');
+            }           
+            $('#showResult').fadeIn();
+        });
+        function cutImg() {
+            $('#showResult').fadeOut();
+            $("#showEdit").fadeIn();
+            var $image = $('#report > img');
+            $image.cropper({
+                aspectRatio: 1 / 1,
+                autoCropArea: 0.7,
+                strict: true,
+                guides: false,
+                center: true,
+                highlight: false,
+                dragCrop: false,
+                cropBoxMovable: false,
+                cropBoxResizable: false,
+                zoom: -0.2,
+                checkImageOrigin: true,
+                background: false,
+                minContainerHeight: 400,
+                minContainerWidth: 300
+            });
+        }
+        function doFinish(startTimestamp, sSize, rst) {     
+            // 此处把截取后的图片的file 赋值
+              if(indextab==1){        
+                        CommunitySrc= rst.origin       
+                    }else{
+                        BackgroundSrc=rst.origin                       
+                    }
+                  
+            $("#report").html('<img src="' + rst.base64 + '" style="width: 100%;height:100%">');
+            cutImg();
+        }
+        $('#upload_file').on('change', function() {
+          
+            var startTimestamp = (new Date()).valueOf();
+            var that = this;
+            if (that.files.length === 0) return;
+            lrz(this.files[0], {
+                    width: 900,
+                    height: 900,
+                    quality: 0.7
+                })
+                .then(function(rst) {                  
+                    doFinish(startTimestamp, that.files[0].size, rst);
+                    return rst;
+                })
+                .then(function(rst) {
+                    // 这里该上传给后端啦
+                    // 伪代码：ajax(rst.base64)..
+                    return rst;
+                })
+                .then(function(rst) {
+                    // 如果您需要，一直then下去都行
+                    // 因为是Promise对象，可以很方便组织代码 \(^o^)/~
+                })
+                .catch(function(err) {
+                    // 万一出错了，这里可以捕捉到错误信息
+                    // 而且以上的then都不会执行
+                    alert(err);
+                })
+                .always(function() {
+                    // 不管是成功失败，这里都会执行
+                });
+        });
+
+    });
+ 
+    </script>
 
 </html>

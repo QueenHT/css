@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +30,7 @@
             </div>
 
             <div class="header_name">
-                <span>动态详情</span>
+                <span>帖子详情</span>
             </div>
             <div class="header_manage" onclick="handleMyCommunity()">
                 <!-- <div class="next_pagebtn">
@@ -46,7 +42,7 @@
         <div class="m-content">
             <div class="m-con-header">
                 <div class="g-tx">
-                        <img src="../img/demoimg/mm.jpg" alt="">
+                        <img src="../img/demoimg/mm.jpg" onerror="this.src='../img/demoimg/mm.jpg'" alt="">
                 </div>
                 <div class="g-name-div">
                     <div class="g-name">
@@ -90,12 +86,14 @@
                 这幅画是以黑暗，严酷的天空显示了梵高的精神状态的困扰，与徘徊不决的通往不同方向的三种途径，
                 与黑色乌鸦架空的于是死亡迹象。
             </div> 
+          <div style=" width: 100%;" id="img-father-div">
             <div class="m-info-img">
                 <img src="../img/info.jpg" alt="">
             </div>  
             <div class="m-info-img">
                     <img src="../img/demoimg/mm.jpg" alt="">
              </div>  
+          </div>
             <div class="m-pl-div">
                 <div class="g-pl">
                     评论
@@ -129,12 +127,12 @@
         </div>
         <div class="m-footer">
                 <div style="margin-right:5%;">
-                        <div class="g-icon">
+                        <div class="g-icon" onclick="Clicklike()">
                            
-                            <i class="iconfont icon-dianzan"></i>
+                            <i class="iconfont icon-dianzan2" id="likeicon"></i>
                         </div>
-                        <div class="g-text" style="margin-left: .05rem;">
-                           赞
+                        <div class="g-text"id="like" >
+                           0
                         </div>
                     </div>
                 <div onclick="commentClick()">
@@ -142,8 +140,8 @@
                            
                             <i class="iconfont icon-pinglun"></i>
                         </div>
-                        <div class="g-text">
-                           留言
+                        <div class="g-text" id="commit">
+                           0
                         </div>
                     </div>
                    
