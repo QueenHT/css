@@ -14,7 +14,7 @@ function selectFileImage(fileObj,el) {
         //获取照片方向角属性，用户旋转控制 
         EXIF.getData(file, function() { 
            // alert(EXIF.pretty(this)); 
-           console.log('file.',file)
+          
             EXIF.getAllTags(this);  
             //alert(EXIF.getTag(this, 'Orientation'));  
             Orientation = EXIF.getTag(this, 'Orientation'); 
@@ -107,10 +107,13 @@ function selectFileImage(fileObj,el) {
                 //uploadImage(base64); 
                 // $("#myImage").attr("src", base64); 
                 base64 = canvas.toDataURL("image/jpeg", 0.8); 
-                console.log(base64)
-                console.log(imgList)
-                imgList.push(base64)
+             
+                file.src=base64
+                console.log(file.src)
+                setTimeout(function(){
+                    imgList.push(file)
                 imghtml()
+                },2000)
             }; 
         }; 
         oReader.readAsDataURL(file); 

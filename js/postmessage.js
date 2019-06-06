@@ -81,134 +81,134 @@ function longsize(v){
 function clickMenu1() {  
    $("#upload_file").click();
   }
-function fileChange(el) {    
-    if (!el.target.files[0].size) return;
-     fileList(el.target);
-  }
-  function fileList(fileList) {
-    let files = fileList.files;
+// function fileChange(el) {    
+//     if (!el.target.files[0].size) return;
+//      fileList(el.target);
+//   }
+//   function fileList(fileList) {
+//     let files = fileList.files;
 
-    for (let i = 0; i < files.length; i++) {
-      //判断是否为文件夹
-      if (files[i].type != "") {
+//     for (let i = 0; i < files.length; i++) {
+//       //判断是否为文件夹
+//       if (files[i].type != "") {
  
-        fileAdd(files[i]);
-      } else {
-        //文件夹处理
-        folders(fileList.items[i]);
-      }
-    }
-  }
-  function folders(files) {
-    //判断是否为原生file
-    if (files.kind) {
-      files = files.webkitGetAsEntry();
-    }
-    files.createReader().readEntries(function(file) {
-      for (let i = 0; i < file.length; i++) {
-        if (file[i].isFile) {
-         foldersAdd(file[i]);
-        } else {
-      folders(file[i]);
-        }
-      }
+//         fileAdd(files[i]);
+//       } else {
+//         //文件夹处理
+//         folders(fileList.items[i]);
+//       }
+//     }
+//   }
+//   function folders(files) {
+//     //判断是否为原生file
+//     if (files.kind) {
+//       files = files.webkitGetAsEntry();
+//     }
+//     files.createReader().readEntries(function(file) {
+//       for (let i = 0; i < file.length; i++) {
+//         if (file[i].isFile) {
+//          foldersAdd(file[i]);
+//         } else {
+//       folders(file[i]);
+//         }
+//       }
       
-    });
+//     });
     
-  }
-  function fileAdd(file) {   
-    //总大小
-    size = this.size + file.size;
-    //判断是否为图片文件
-    if (file.type.indexOf("image") == -1) {
-      return;
-    } else {
-      EXIF.getData(file, function() { 
-        // alert(EXIF.pretty(this)); 
-        console.log('file.',file)
-         EXIF.getAllTags(this);  
-         //alert(EXIF.getTag(this, 'Orientation'));  
-         Orientation = EXIF.getTag(this, 'Orientation'); 
-         //return; 
-     }); 
-      let reader = new FileReader();
-      reader.vue = this;
-      reader.readAsDataURL(file);    
-      reader.onload = function() {     
-        var image = new Image();
-        image.src =this.result;  
-        var base64=null;
-        image.onload = function() { 
-          console.log('image.onload')
-          var expectWidth = this.naturalWidth; 
-          var expectHeight = this.naturalHeight; 
+//   }
+//   function fileAdd(file) {   
+//     //总大小
+//     size = this.size + file.size;
+//     //判断是否为图片文件
+//     if (file.type.indexOf("image") == -1) {
+//       return;
+//     } else {
+//       EXIF.getData(file, function() { 
+//         // alert(EXIF.pretty(this)); 
+//         console.log('file.',file)
+//          EXIF.getAllTags(this);  
+//          //alert(EXIF.getTag(this, 'Orientation'));  
+//          Orientation = EXIF.getTag(this, 'Orientation'); 
+//          //return; 
+//      }); 
+//       let reader = new FileReader();
+//       reader.vue = this;
+//       reader.readAsDataURL(file);    
+//       reader.onload = function() {     
+//         var image = new Image();
+//         image.src =this.result;  
+//         var base64=null;
+//         image.onload = function() { 
+//           console.log('image.onload')
+//           var expectWidth = this.naturalWidth; 
+//           var expectHeight = this.naturalHeight; 
            
-          if (this.naturalWidth > this.naturalHeight && this.naturalWidth > 800) { 
-              expectWidth = 800; 
-              expectHeight = expectWidth * this.naturalHeight / this.naturalWidth; 
-          } else if (this.naturalHeight > this.naturalWidth && this.naturalHeight > 1200) { 
-              expectHeight = 1200; 
-              expectWidth = expectHeight * this.naturalWidth / this.naturalHeight; 
-          } 
-          var canvas = document.createElement("canvas"); 
-          var ctx = canvas.getContext("2d"); 
-          canvas.width = expectWidth; 
-          canvas.height = expectHeight; 
-          ctx.drawImage(this, 0, 0, expectWidth, expectHeight); 
-          var base64 = null;           
-          //修复ios 
-          if (navigator.userAgent.match(/iphone/i)) { 
-              //如果方向角不为1，都需要进行旋转 added by lzk 
-              if(Orientation != "" && Orientation != 1){ 
-                  alert('旋转处理456'); 
-                  switch(Orientation){ 
-                      case 6://需要顺时针（向左）90度旋转 
-                          alert('需要顺时针（向左）90度旋转'); 
-                          rotateImg(this,'left',canvas); 
-                          break; 
-                      case 8://需要逆时针（向右）90度旋转 
-                          alert('需要顺时针（向右）90度旋转'); 
-                          rotateImg(this,'right',canvas); 
-                          break; 
-                      case 3://需要180度旋转 
-                          alert('需要180度旋转'); 
-                          rotateImg(this,'right',canvas);//转两次 
-                          rotateImg(this,'right',canvas); 
-                          break; 
-                  }        
-              } 
+//           if (this.naturalWidth > this.naturalHeight && this.naturalWidth > 800) { 
+//               expectWidth = 800; 
+//               expectHeight = expectWidth * this.naturalHeight / this.naturalWidth; 
+//           } else if (this.naturalHeight > this.naturalWidth && this.naturalHeight > 1200) { 
+//               expectHeight = 1200; 
+//               expectWidth = expectHeight * this.naturalWidth / this.naturalHeight; 
+//           } 
+//           var canvas = document.createElement("canvas"); 
+//           var ctx = canvas.getContext("2d"); 
+//           canvas.width = expectWidth; 
+//           canvas.height = expectHeight; 
+//           ctx.drawImage(this, 0, 0, expectWidth, expectHeight); 
+//           var base64 = null;           
+//           //修复ios 
+//           if (navigator.userAgent.match(/iphone/i)) { 
+//               //如果方向角不为1，都需要进行旋转 added by lzk 
+//               if(Orientation != "" && Orientation != 1){ 
+//                   alert('旋转处理456'); 
+//                   switch(Orientation){ 
+//                       case 6://需要顺时针（向左）90度旋转 
+//                           alert('需要顺时针（向左）90度旋转'); 
+//                           rotateImg(this,'left',canvas); 
+//                           break; 
+//                       case 8://需要逆时针（向右）90度旋转 
+//                           alert('需要顺时针（向右）90度旋转'); 
+//                           rotateImg(this,'right',canvas); 
+//                           break; 
+//                       case 3://需要180度旋转 
+//                           alert('需要180度旋转'); 
+//                           rotateImg(this,'right',canvas);//转两次 
+//                           rotateImg(this,'right',canvas); 
+//                           break; 
+//                   }        
+//               } 
              
-          }
+//           }
      
-          base64 = canvas.toDataURL("image/jpeg", 0.8); 
-          alert(base64)
-          file.src =base64 ;
-          console.log(file)
-          console.log('1',file.src)
-          if (imgList.length >= 6) {
-          } else {
-            // 设置定时 拿到src的值再进行push和渲染
+//           base64 = canvas.toDataURL("image/jpeg", 0.8); 
+//           alert(base64)
+//           file.src =base64 ;
+//           console.log(file)
+//           console.log('1',file.src)
+//           if (imgList.length >= 6) {
+//           } else {
+//             // 设置定时 拿到src的值再进行push和渲染
      
-          setTimeout(function(){
-            imgList.push({
-              file
-            });
-            imghtml()
-          },2000)
+//           setTimeout(function(){
+//             imgList.push({
+//               file
+//             });
+//             imghtml()
+//           },2000)
           
-          }
-        }
+//           }
+//         }
           
-        console.log('file',file)
+//         console.log('file',file)
         
-      };     
-    }
-  }
- function  foldersAdd(entry) {
-    entry.file(function(file) {
-    fileAdd(file);
-    });
-  }
+//       };     
+//     }
+//   }
+//  function  foldersAdd(entry) {
+//     entry.file(function(file) {
+//     fileAdd(file);
+//     });
+//   }
  function fileDel(index) {
     // size = size - imgList[index].file.size; //总大小
     imgList.splice(index, 1);  
@@ -218,11 +218,10 @@ function imghtml(){
  
     form.imgstr='';
     for(var i=0;i<imgList.length;i++){
-
-      console.log(imgList[i].file) 
+      console.log(imgList[i])
       form.imgstr+= `
          <div class="img-upload">
-         <div class="img-show"  style="background-image: url(`+imgList[i].file.src+`)">
+         <div class="img-show"  style="background-image: url(`+imgList[i].src+`)">
             
            <p class="img-close"  >
              <img style="width:.3rem;height:.3rem;"  src="../img/del.png"  onclick="fileDel(`+i+`)" alt>
@@ -369,7 +368,7 @@ function release(){
 function manageimgurl(){
   var formData = new FormData()
              for(var i = 0; i < imgList.length; i++) {           
-                formData.append('file', imgList[i].file);
+                formData.append('file', imgList[i]);
            }
   $.ajax({
     //提交数据的类型 POST GET
