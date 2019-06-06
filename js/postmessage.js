@@ -160,7 +160,7 @@ function fileChange(el) {
           if (navigator.userAgent.match(/iphone/i)) { 
               //如果方向角不为1，都需要进行旋转 added by lzk 
               if(Orientation != "" && Orientation != 1){ 
-                  alert('旋转处理'); 
+                  alert('旋转处理123'); 
                   switch(Orientation){ 
                       case 6://需要顺时针（向左）90度旋转 
                           alert('需要顺时针（向左）90度旋转'); 
@@ -194,7 +194,7 @@ function fileChange(el) {
             file
           });
           imghtml()
-        },500)
+        },2000)
         }
       };     
     }
