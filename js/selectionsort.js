@@ -149,11 +149,11 @@ function searchCommunity(searchName){
 //     localStorage.setItem('communityId',id);
 //     window.history.go(-1)
 //   }
-  function backpost(){
+  function backpost(name,id){
     if (checkSystem()) {
-        window.location.href =`./postmessage.html?openId=${openId}&masterSecret=${masterSecret}`
+        window.location.href =`./postmessage.html?openId=${openId}&masterSecret=${masterSecret}&name=${name}&id=${id}`
     } else {
-        data_href(`./postmessage.html?openId=${openId}&masterSecret=${masterSecret}`)
+        data_href(`./postmessage.html?openId=${openId}&masterSecret=${masterSecret}&name=${name}&id=${id}`)
  }
   }
   function back(){

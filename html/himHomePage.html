@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css//pageHeader.css">
+    <link rel="stylesheet" href="../css/iconfont/iconfont.css">
+    <link rel="stylesheet" href="../css/myHomePage.css">
+    <script src="../js/pub/jquery_3.2.1.min.js"></script>
+    <script src="../js/pub/rem.js"></script>
+    <script src="../js/pub/crypto_js.js"></script>
+    <script src="../js/pub/qianming.js"></script>
+    <script src="../js/pub/publicJS.js"></script>
+    <script src="../js/touchJs/touchTouch.jquery.js"></script>
+    <title>个人主页</title>
+</head>
+
+<body>
+    <div class="myhomepage">
+        <header class="community_header" id="comHeader">
+            <div class="header_wrap">
+                <div class="header header_bg" style="background: none">
+                    <div class="header_back" onclick="back()">
+                        <div class="back_btn">
+                            <span class="iconfont icon-fenxiang"></span>
+                        </div>
+                    </div>
+                    <div class="header_name">
+                        <span>他的主页</span>
+                    </div>
+
+                    <div class="header_manage">
+
+                    </div>
+                </div>
+                <div class="header_bottom"></div>
+            </div>
+        </header>
+        <div class="myhome-scroll">
+            <div class="myhome-content">
+                <div class="homepage_user">
+                    <div class="usercontainer">
+                        <div class="user_head">
+                            <div class="user_head_pic">
+                                <img src="../img/demoimg/mm.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user_detail">
+                        <div class=" sign_date sign_user_infomation">
+                            <div>
+                                SiYunXin
+                            </div>
+                            <div>
+                                JiNan
+                            </div>
+                        </div>
+                        <div class="sign_date">
+                            <div>
+                                <span class="detail_count">注册日期</span>:<span class="detail_count">6月1日，2019</span>
+                            </div>
+                        </div>
+                        <div class="detail_wrap">
+                            <div>
+                                <span>被赞</span><span class="detail_count">0</span>
+                            </div>
+                            <div>
+                                <span>关注</span><span class="detail_count">0</span>
+                            </div>
+                            <div>
+                                <span>粉丝</span><span class="detail_count">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="split_line"></div>
+                <nav class="mypage_nav">
+                    <div>
+                        <div class="nav_item nav_item_active">我</div>
+                    </div>
+                    <div>
+                        <div class="nav_item">收藏</div>
+                    </div>
+                    <div>
+                        <div class="nav_item">作品</div>
+                    </div>
+                    <div>
+                        <div class="nav_item">评价</div>
+                    </div>
+                </nav>
+                <div class="split_line"></div>
+                <article class="articlebox">
+                    <div class="timebase">
+                        <div class="timecontainer">
+                            <div class="time_year">
+                                <span>2018年</span>
+                            </div>
+                            <div class="time_body">
+                                <div class="time_top time_left">
+                                    14/07月
+                                </div>
+                                <div class="time_top time_right">
+                                    <div class="time_title">
+                                        我卖出一件商品
+                                    </div>
+                                    <div class="time_despic">
+                                        <img src="" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timebase">
+                        <div class="collectionbox">
+                            <div class="col-item">
+                                <img>
+                            </div>
+                            <div class="col-item">
+                                <img>
+                            </div>
+                            <div class="col-item">
+                                <img>
+                            </div>
+                            <div class="col-item">
+                                <img>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timebase">
+                        <div class="production-container">
+                            <div class="product-item">
+                                <img>
+                            </div>
+                            <div class="product-item">
+                                <img>
+                            </div>
+                            <div class="product-item">
+                                <img>
+                            </div>
+                            <div class="product-item">
+                                <img>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timebase">
+                        <div class="evaluete-container">
+                            <div class="evaluete-item">
+                                <div class="evaluete-left">
+                                    <div class="evaluete-head">
+                                        <img src="" alt="">
+                                    </div>
+                                </div>
+                                <div class="evaluete-right">
+                                    <div>
+                                        <div class="evaluete-text">
+                                            <div class="evaluete-name">你的名字</div>
+                                            <div>这是啥年代的古董？这是啥年代的古董？这是啥年代的古董？这是啥年代的古董？这是啥年代的古董？</div>
+                                        </div>
+                                        <div class="evaluete-time">
+                                            <div>
+                                                2019-06-05 16:12
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="evaluete-item">
+                                    <div class="evaluete-left">
+                                        <div class="evaluete-head">
+                                            <img src="" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="evaluete-right">
+                                        <div>
+                                            <div class="evaluete-text">
+                                                <div class="evaluete-name">你的名字</div>
+                                                <div>这是啥年代的古董？这是啥年代的古董？这是啥年代的古董？这是啥年代的古董？这是啥年代的古董？</div>
+                                            </div>
+                                            <div class="evaluete-time">
+                                                <div>
+                                                    2019-06-05 16:12
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                            </div>
+                            <div class="evaluete-item">
+                                        <div class="evaluete-left">
+                                            <div class="evaluete-head">
+                                                <img src="" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="evaluete-right">
+                                            <div>
+                                                <div class="evaluete-text">
+                                                    <div class="evaluete-name">你的名字</div>
+                                                    <div>这是啥年代的古董？这是啥年代的古董？这是啥年代的古董？这是啥年代的古董？这是啥年代的古董？</div>
+                                                </div>
+                                                <div class="evaluete-time">
+                                                    <div>
+                                                        2019-06-05 16:12
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                            </div>   
+                        </div>
+                    </div>
+
+                </article>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../js/myHomePage.js"></script>
+
+</html>

@@ -1,13 +1,14 @@
-// imgList=[];
 function selectFileImage(fileObj,el) { 
+
     var file = fileObj.files['0']; 
+    console.log(file)
     //图片方向角 added by lzk     
     if (file) { 
         var rFilter = /^(image\/jpeg|image\/png)$/i; // 检查图片格式 
-        if (!rFilter.test(file.type)) { 
-            //showMyTips("请选择jpeg、png格式的图片", false); 
-            return; 
-        } 
+        // if (!rFilter.test(file.type)) { 
+        //     //showMyTips("请选择jpeg、png格式的图片", false); 
+        //     return; 
+        // } 
         // var URL = URL || webkitURL; 
         //获取照片方向角属性，用户旋转控制 
         EXIF.getData(file, function() {           

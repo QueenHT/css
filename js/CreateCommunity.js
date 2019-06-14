@@ -61,6 +61,7 @@ function ueryType(){
 
 // 处理社区图片url
 function manageCommunityurl(){
+
     var formData = new FormData()              
      formData.append('file',CommunitySrc);        
     $.ajax({
@@ -78,11 +79,13 @@ function manageCommunityurl(){
         //成功返回之后调用的函数
         success: function (data) {
             Communityicon=data.list[0].newName;
-           
+            // 处理背景图片url  背景图片处理成功后 再执行创建请求
+            manageBackgroundurl()
         },
         //调用出错执行的函数
         error: function () {
-
+            $.hideLoading() 
+            Toast('创建失败')
         }
     });
 }
@@ -105,10 +108,61 @@ function manageBackgroundurl(){
         //成功返回之后调用的函数
         success: function (data) {
             Backgroundicon=data.list[0].newName;
+            // 执行创建社区请求
+            $.ajax({
+                //提交数据的类型 POST GET
+                crossDomain: true,
+                type: "GET",
+                jsonp: "callback",           
+                //提交的网址
+                url: API + `/community/setCommunityConf.shtml`,
+                //提交的数据
+                data:{
+                    channelName:newsTitle,
+                    communityIcon:Communityicon,
+                    communityType:typeId,
+                    communitySetting:Backgroundicon,
+                },
+                headers: {
+                    'nonceStr': nonceStr,
+                     'openId': openId,
+                    'signature': signature,
+                    'timestamp': timestamp,
+                      'appId': appId,
+                  },
+                //成功返回之后调用的函数
+                success: function (data) {
+                    if(data.status===0){
+                        $.hideLoading() 
+                        Toast('创建成功')
+                        localStorage.clear();
+                        var channelId=parseInt(data.msg)
+                        console.log(data)
+                        setTimeout(function(){
+                            if (checkSystem()) {
+                                window.location.href =`./communityInfo.html?openId=${openId}&masterSecret=${masterSecret}&channelId=${channelId}`
+                            } else {
+                                 data_href(`./communityInfo.html?openId=${openId}&masterSecret=${masterSecret}&channelId=${channelId}`)
+                            }
+                          },500)
+            
+                      }else{
+                        $.hideLoading() 
+                        Toast(data.msg)
+                      }
+                },
+                //调用出错执行的函数
+                error: function () {
+                    $.hideLoading() 
+                    Toast('创建失败')
+                }
+            });
         },
         //调用出错执行的函数
         error: function () {
-
+            $.hideLoading() 
+            Toast('创建失败')
+             
         }
     });
 }
@@ -120,55 +174,10 @@ $('.m-footer-btn').click(function(){
         Toast('请填写社区名称')
       }else if(!typeId){
         Toast('请选择社区类型')
-      }else if(!Communityicon){
-        Toast('请选择社区图标')
-      }else if(!Backgroundicon){
-        Toast('请选择背景图片')
       }else{
-        $.ajax({
-            //提交数据的类型 POST GET
-            crossDomain: true,
-            type: "GET",
-            jsonp: "callback",           
-            //提交的网址
-            url: API + `/community/setCommunityConf.shtml`,
-            //提交的数据
-            data:{
-                channelName:newsTitle,
-                communityIcon:Communityicon,
-                communityType:typeId,
-                communitySetting:Backgroundicon,
-            },
-            headers: {
-                'nonceStr': nonceStr,
-                 'openId': openId,
-                'signature': signature,
-                'timestamp': timestamp,
-                  'appId': appId,
-              },
-            //成功返回之后调用的函数
-            success: function (data) {
-                if(data.status===0){
-                    Toast('创建成功')
-                    localStorage.clear();
-                    var channelId=parseInt(data.msg)
-                    setTimeout(function(){
-                        if (checkSystem()) {
-                            window.location.href =`./communityInfo.html?openId=${openId}&masterSecret=${masterSecret}&channelId=${channelId}`
-                        } else {
-                             data_href(`./communityInfo.html?openId=${openId}&masterSecret=${masterSecret}&channelId=${channelId}`)
-                        }
-                      },500)
-        
-                  }else{
-                    Toast(data.msg)
-                  }
-            },
-            //调用出错执行的函数
-            error: function () {
-    
-            }
-        });  
+        //   先处理社区图标 社区图标成功后再处理 背景图片
+        $.showLoading('正在提交')
+        manageCommunityurl()
       }
 })
 // 获取当前选中的类型的code值
@@ -180,9 +189,10 @@ function  judgeType(val){
        })     
 }
 function back(){
+    
     var from = getQueryVariable('from')  
     if(from){
-     backurl('postmessage')
+        goBackfn()
     }else{
      window.history.go(-1)  
     }

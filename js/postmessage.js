@@ -1,6 +1,8 @@
 
-var name=localStorage.getItem('communityname')
-var nameid=localStorage.getItem('communityId')
+var name=getParams('name')
+// 选择的社区名称
+var nameid=getQueryVariable('id')
+// 选择的社区id
 var size=0;
 var form={
   newsTitle:"",
@@ -30,33 +32,32 @@ function setHeight(){
   var dHeight =$(window).height();
   var xheader=$('.header_wrap').height();
   var Height=dHeight-xheader-2;
-  $('.m-content').height(Height+'px')
+  $('.m-content').height(Height+'px');
+    // 使用go(-1)时会有数据缓存清除数据 
+    $('#textArea').val('');
+    imgList=[];
+    form.icon=[];
+    $('input').val('');
+    $('#m-img').html(`  <div  class="fujian" id="fujian" onclick="clickMenu1()">
+    <div style="width:1.6rem;height:1.6rem;margin:0 auto;text-align:center;">
+      <img style="width:40%;padding-top:0.6rem;" src="../img/add.png" alt>
+    </div>
+      <div style="width:100%;height:.6rem;text-align:center">照片</div>           
+  </div>`);
   }
   // 如果当前页面获取到那么说明是从选择社区页面返回回来的 将选择的社区渲染到请选择的div
 if(!name|| name=='null'){
   $('.fl-tz-div').html(`\<div class="fl-tz-tex">去选择</div>
   <div class="fl-tz-img"><img src="../img/right.png" alt="" srcset=""></div>`)
   $('.fl-tz-div').css('color','#bfbfbf') ;
-  // 使用go(-1)时会有数据缓存清除数据 
- $('#textArea').val('');
-  imgList=[];
-  form.icon=[];
-  $('input').val('')
+
 }else{
   form.channelId=nameid;
   $('.fl-tz-div').html(name)
   $('.fl-tz-div').css('color','#000')
   renderData();
 }
-function back(){
-  localStorage.clear();
-   var from = getQueryVariable('from')  
-   if(from){
-    goBackfn()
-   }else{
-    window.history.go(-1)  
-   }
-}
+
 
   /*这个函数是为了保证浏览者点击introTextarea这层div时，使焦点自动移动到textarea*/
   function focusTextarea() {
@@ -109,9 +110,7 @@ function imghtml(){
               <div style="width:100%;height:.6rem;text-align:center">照片</div>           
           </div>`
           $('#m-img').html(form.imgstr);
-    }
-    manageimgurl()
-   
+    }   
 }
 function labelfn(id,val){
   // 得到当前是第几个输入框
@@ -176,7 +175,7 @@ $('.m-button-div').click(function(){
   }else if(form.summary.length == 0 || form.summary.match(/^\s+$/g)){
     Toast('请填写帖子内容')
   }else{
-    release()    
+    manageimgurl()
   }
 })
 
@@ -216,12 +215,13 @@ function release(){
         var dynamicDetailsID=parseInt(data.msg)
       setTimeout(function(){
         if (checkSystem()) {
-          window.location.href = `./postDetails.html?openId=${openId}&masterSecret=${masterSecret}&newsId=${dynamicDetailsID}&h5form=Post`
+          window.location.href = `./postDetails.html?openId=${openId}&masterSecret=${masterSecret}&newsId=${dynamicDetailsID}&h5from=postmessage`
         } else {
-          data_href(`./postDetails.html?openId=${openId}&masterSecret=${masterSecret}&newsId=${dynamicDetailsID}&h5form=Post`)
+          data_href(`./postDetails.html?openId=${openId}&masterSecret=${masterSecret}&newsId=${dynamicDetailsID}&h5from=postmessage`)
         }
-      },1000)
+      },500)
       }else{
+        $.hideLoading() 
         Toast('发布失败')
       }
     },
@@ -236,8 +236,10 @@ function release(){
 }
 // 处理图片url
 function manageimgurl(){
+  $.showLoading('正在提交')
   var formData = new FormData()
-             for(var i = 0; i < imgList.length; i++) {           
+             for(var i = 0; i < imgList.length; i++) {  
+               console.log         
                 formData.append('file', imgList[i]);
            }
   $.ajax({
@@ -259,16 +261,19 @@ function manageimgurl(){
       for(var i=0;i<list.length;i++){
         form.icon.push({ path:list[i].newName})
       }
+      release()   
     },
     //调用出错执行的函数
     error: function () {
-
+      $.hideLoading() ;
+      Toast('提交失败')
     }
 });
 }
 function renderData(){
   var localform=JSON.parse(localStorage.getItem('DBMform'));
-    $('#titleInp').val(localform.newsTitle);
+  if(localform){
+      $('#titleInp').val(localform.newsTitle);
   // 标题
 if(localform.summary.length != 0){
   $('#textArea').val(localform.summary);
@@ -280,6 +285,7 @@ form.icon=localform.icon;
 if(localform.imgstr){
   $('#m-img').html(localform.imgstr)
 }
+  }
 
 }
 // 处理本地存储传过来的label字符串
@@ -291,69 +297,13 @@ function labelhtml(label){
   })
  }
 }
-
-// 获取到焦点元素滚动到可视区
-function activeElementScrollIntoView(activeElement,delay) 
-{  
-var editable = activeElement.getAttribute('contenteditable')  
-// 输入框、textarea或富文本获取焦点后没有将该元素滚动到可视区  
-if(activeElement.tagName =='INPUT'||activeElement.tagName =='TEXTAREA'|| editable ===''||editable){
-      setTimeout(function(){activeElement.scrollIntoView();
-      },delay)
-  }
+function back(){
+  localStorage.clear();
+   var from = getQueryVariable('from')  
+   var h5from = getQueryVariable('h5from')  
+   if(from){
+    goBackfn()
+   }else{
+    h5backurl('allCommunity')
+   }
 }
-// ...
-/**
- * ios键盘收起后页面不下滑
- * android键盘弹起后 input框被遮盖
- */
-var judgeDeviceType = function(){ 
-var ua = window.navigator.userAgent.toLocaleLowerCase();
-var isIOS =/iphone|ipad|ipod/.test(ua);  
-var isAndroid =/android/.test(ua);  
-return{
-    isIOS:isIOS,
-    isAndroid:isAndroid 
-}}();
-// 监听输入框的软键盘弹起和收起事件
-function listenKeybord($input){  
-
-if(judgeDeviceType.isIOS) 
-  {  
-  // IOS 键盘弹起：IOS 和 Android 输入框获取焦点键盘弹起
-      $input.addEventListener('focus',function(){
-  // IOS 键盘弹起后操作    
-  },false)    
-// IOS 键盘收起：IOS 点击输入框以外区域或点击收起按钮，输入框都会失去焦点，键盘会收起，
-    $input.addEventListener('blur',()=>{
-     // 软键盘收起
-$("input").on("blur",function(){
-	window.scroll(0,0);//失焦后强制让页面归位
-});     
-// IOS 键盘收起后操作    
-})  
-}  
-// Andriod 键盘收起：Andriod 键盘弹起或收起页面高度会发生变化，以此为依据获知键盘收起
-if(judgeDeviceType.isAndroid) 
-{    
- 
-var originHeight = document.documentElement.clientHeight || document.body.clientHeight;
-    window.addEventListener('resize',function(){ 
-var resizeHeight = document.documentElement.clientHeight|| document.body.clientHeight;    
-if(originHeight < resizeHeight) {
-// Android 键盘收起后操作      
-}else{
-// Android 键盘弹起后操作 
-alert('弹起')
-activeElementScrollIntoView($input,1000); 
-}
- originHeight = resizeHeight;    
-},false)  
-}
-}
-
-var $inputs = document.querySelectorAll('input');
-for(var i =0;i < $inputs.length; i++) {
-  listenKeybord($inputs[i]);
-}
-alert('测试')

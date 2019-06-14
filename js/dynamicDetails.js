@@ -13,22 +13,6 @@ var createOper;
 var channelId=getQueryVariable('busiId');
 // 动态id
 var $input= document.getElementById('commentInp')
-// 点击留言按钮事件
-function commentClick(){    
-    $('.dynamic-m-footer').css('display','none')
-    $('.comment-input-div').css('display','block') 
-    $('#commentInp').focus();   
- 
-}
-function getBackHref(){
-  var from=getQueryVariable('h5from')
-  if(from){
-    goBackfn()
-  }else{
-    window.history.go(-1)  
-  }
-  
-}
 //获取动态内容
 $(function(){
     $.ajax({
@@ -128,12 +112,10 @@ $(function(){
           </div>
           <div class="g-pl-content-div">
               <div class="g-pl-name-div">
-                  <p>
-                          <span class="g-pl-name">${item.nickName} :</span>
-                          <span class="g-pl-content">
-                                 ${item.content}
-                          </span>
-                  </p>                 
+                    <div class="g-pl-name">${item.nickName} :</div>
+                    <div class="g-pl-content">                        
+                          ${item.content}                    
+                    </div>         
               </div>           
               <div class="g-pl-time">
                  ${item.commentDate}
@@ -152,24 +134,26 @@ $(function(){
   });
 })
 // 点击留言按钮事件
-
 $('#commentAfter').focus(function(){
-  $('.m-footer').css('display','none')
-  $('.comment-input-div').css('display','block')
-  $('.comment-input-div').focus();
+  $('.dynamic-m-footer').css('display','none');
+  $('.comment-input-div').css('display','block');
+  $('#commentAfter').blur();
+  $('#commentInp').focus();   
 })
 //  留言取消按钮事件
 $('#discomment').click(function(){
   $('.comment-input-div').css('display','none')
-  $('.m-footer').css('display','flex')
+  $('.dynamic-m-footer').css('display','flex')
   $('#commentAfter').val($('#comment').val())
+  $('#commentInp').blur();
 })
 // 点击留言框以外的区域时 关闭留言框区域
 $('.m-content').click(function(){
   if($('.comment-input-div').css('display')=='block'){
     $('.comment-input-div').css('display','none')
-    $('.m-footer').css('display','flex')
-    $('#commentAfter').val($('#comment').val())
+    $('.dynamic-m-footer').css('display','flex')
+    $('#commentAfter').val($('#comment').val());
+    $('#commentInp').blur();
   }
 })
 // 留言按钮点击事件 
@@ -424,7 +408,15 @@ function transpond(){
   }
 
 }
-// 软键盘收起
-$("input").on("blur",function(){
-	window.scroll(0,0);//失焦后强制让页面归位
-});
+function getBackHref(){
+  var from=getQueryVariable('from')
+  var h5from=getQueryVariable('h5from')
+  if(from){
+    goBackfn()
+  }else if(h5from){
+    h5backurl(h5from)
+  }else{
+    window.history.go(-1)  
+  }
+  
+}

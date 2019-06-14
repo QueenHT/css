@@ -117,7 +117,7 @@ function forward(){
 function back(){
   var from = getQueryVariable('from')  
     if(from){
-     backurl('postmessage')
+      goBackfn()
     }else{
      window.history.go(-1)  
     }

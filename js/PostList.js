@@ -1,5 +1,5 @@
 
-var communityInfo = {
+var communityList = {
     name:'',
     list:[],
     currentPage: 1,
@@ -21,8 +21,8 @@ $('#community_art').css('height',`${wrapH+50}px`);
 $('.community_main').pullToRefresh({
 onRefresh: function () {
     $('.community_body').html('')
-    communityInfo.currentPage = 1
-    communityInfo.list = []
+    communityList.currentPage = 1
+    communityList.list = []
     $('#noMore').css('display','none')
     $('#wait').css('display','none')
     setTimeout(function () {
@@ -42,13 +42,13 @@ var loading = false //状态标记
 $('.community_main').infinite(50).on("infinite", function () {
 if (loading) return;
 loading = true;
-if( communityInfo.currentPage >= communityInfo.totalPages){
+if( communityList.currentPage >= communityList.totalPages){
     $('#noMore').css('display','block')
     $('#wait').css('display','none')
     loading = false;
     return
  }else{
-    communityInfo.currentPage ++
+    communityList.currentPage ++
  }
 
 setTimeout(function () {
@@ -60,12 +60,12 @@ setTimeout(function () {
 
 //获取社区贴子列表
 function getCommunityList(){
-var sessionCommunityInfo = JSON.parse(window.sessionStorage.getItem('communityInfo'))
-if( sessionCommunityInfo ){
-    communityInfo = sessionCommunityInfo
-    renderList(communityInfo.list) 
-    getAnyMore(communityInfo.currentPage,communityInfo.totalPages)
-    $('.community_main').scrollTop(communityInfo.scrollTop)
+var sessioncommunityList = JSON.parse(window.sessionStorage.getItem('communityList'))
+if( sessioncommunityList ){
+    communityList = sessioncommunityList
+    renderList(communityList.list) 
+    getAnyMore(communityList.currentPage,communityList.totalPages)
+    $('.community_main').scrollTop(communityList.scrollTop)
     window.sessionStorage.clear()
     return
 }
@@ -83,7 +83,7 @@ $.ajax({
         appId: appId,
     },
     data: {
-        currentPage: communityInfo.currentPage,
+        currentPage: communityList.currentPage,
         pageSize:10
     },
     success: function (data) {
@@ -91,11 +91,11 @@ $.ajax({
             Toast(data.msg)
         }
         var arr = data.list
-        communityInfo.currentPage = data.pageInfo.currentPage;
-        communityInfo.totalPages = data.pageInfo.totalPages;
-        getAnyMore( communityInfo.currentPage, communityInfo.totalPages )
+        communityList.currentPage = data.pageInfo.currentPage;
+        communityList.totalPages = data.pageInfo.totalPages;
+        getAnyMore( communityList.currentPage, communityList.totalPages )
         arr.forEach(function(item){
-            communityInfo.list.push(item)
+            communityList.list.push(item)
         })
         renderList(arr)
     },
@@ -194,8 +194,8 @@ $('span[delete=0]').css('display','none')
 * @param {*} id 贴子ID
 */
 function toMessageInfo(id){
-communityInfo.scrollTop = $('.community_main').scrollTop()
-window.sessionStorage.setItem('communityInfo',JSON.stringify( communityInfo ))
+communityList.scrollTop = $('.community_main').scrollTop()
+window.sessionStorage.setItem('communityList',JSON.stringify( communityList ))
 if (checkSystem()) {
     window.location.href =`./postDetails.html?openId=${openId}&masterSecret=${masterSecret}&newsId=${id}`
     } else {
@@ -315,8 +315,8 @@ function handleDelete(id,i,e){
             if(data.status ==0){
                 Toast('删除成功');
               $(`div[divId=${id}]`).remove()
-              communityInfo.list.splice(i,1)
-              if(communityInfo.list.length==LAST_COUNT){
+              communityList.list.splice(i,1)
+              if(communityList.list.length==LAST_COUNT){
                 getCommunityList()
             }
               return

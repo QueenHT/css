@@ -61,19 +61,16 @@
 			var touch = e.originalEvent,
 				startX = touch.changedTouches[0].pageX;
 	
-			slider.on('touchmove',function(e){
-				
-				e.preventDefault();
-				
+				overlay.on('touchmove',function(e){				
+				e.preventDefault();				
 				touch = e.originalEvent.touches[0] ||
-						e.originalEvent.changedTouches[0];
-				
+						e.originalEvent.changedTouches[0];				
 				if(touch.pageX - startX > 10){
-					slider.off('touchmove');
+					overlay.off('touchmove');
 					showPrevious();
 				}
 				else if (touch.pageX - startX < -10){
-					slider.off('touchmove');
+					overlay.off('touchmove');
 					showNext();
 				}
 			});

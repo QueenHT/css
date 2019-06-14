@@ -77,3 +77,6 @@ a {
 .fontcolor{
     color:#131313;
 }
+input{
+    -webkit-appearance: none;
+}

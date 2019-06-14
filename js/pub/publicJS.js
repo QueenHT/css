@@ -69,6 +69,6 @@ function data_href(url) {
     if (checkSystem()) {
       window.location.href = `./${url}.html?openId=${openId}&masterSecret=${masterSecret}`
     } else {
-      data_href(`./${url}?openId=${openId}&masterSecret=${masterSecret}`)
+      data_href(`./${url}.html?openId=${openId}&masterSecret=${masterSecret}`)
     }
   }

@@ -3,6 +3,9 @@ const API = 'http://172.20.188.157:8180/api'
 const IMGAPI = 'http://image.haiyimall.com/'
 //http://172.20.188.157:8180/api   dbm
 
+// const openId = 'c76cd9b99c624f7b9c4832d542d98591'
+// const masterSecret = '00c84f22c8d44e3bbf7f6406c2b2ca88'
+
 const openId = '81cf3f0760f44e7eabf1f5d12a330b49'
 const masterSecret = 'cfb92ba7f3bf45148dd62c17814baf29'
 const LAST_COUNT=5;   //删除小于等于此值进行自动加载

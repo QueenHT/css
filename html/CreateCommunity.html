@@ -75,7 +75,7 @@
                                           <div  class="cjsqimg-text-div">背景图片</div>
                                       </div>
                               <div  style="display: none;">
-                                      <input name="evidence" id="upload_file"  type="file"/>
+                                      <input name="evidence" id="upload_file"  accept="image/*" type="file"/>
                               </div>                                    
                    
                       </div>
@@ -128,12 +128,7 @@ var cutHeight=1;
             $('#showResult').fadeIn();
         });
         $('#confirmBtn').on('click', function() {
-            // 处理图片url事件
-            if(indextab==1){        
-                manageCommunityurl()
-                    }else{
-              manageBackgroundurl()                 
-                    }
+           
             $("#showEdit").fadeOut();
             var $image = $('#report > img');
             var dataURL = $image.cropper("getCroppedCanvas");

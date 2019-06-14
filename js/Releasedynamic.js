@@ -89,8 +89,6 @@ function imghtml(){
           </div>`
           $('#m-img').html(htmlstr);
     }
-    manageimgurl()
-
 }
 function labelfn(id,val){
   // 得到当前是第几个输入框
@@ -138,14 +136,14 @@ $('.m-button-div').click(function(){
   }else if(from.summary.length == 0 || from.summary.match(/^\s+$/g)){
     Toast('请填写动态内容')
   }else{
-        release() 
+          manageimgurl()
 
   }
 })
 
 // 发布时请求的ajax
 function release(){
-  $.showLoading('正在提交')
+ 
   $.ajax({
     //提交数据的类型 POST GET
     crossDomain: true,
@@ -174,16 +172,20 @@ function release(){
     success: function (data) {
       $.hideLoading()  
       if(data.status===0){
+        $.hideLoading()  
         Toast('发布成功')        
         localStorage.clear();
         var dynamicDetailsID=parseInt(data.msg)
+       setTimeout(function(){
         if (checkSystem()) {
-          window.location.href = `./dynamicDetails.html?openId=${openId}&masterSecret=${masterSecret}&busiId=${dynamicDetailsID}&h5fromx=Release`
+          window.location.href = `./dynamicDetails.html?openId=${openId}&masterSecret=${masterSecret}&busiId=${dynamicDetailsID}&from=Releasedynamic`
         } else {
-          data_href(`./dynamicDetails.html?openId=${openId}&masterSecret=${masterSecret}&busiId=${dynamicDetailsID}&h5form=Release`)
+          data_href(`./dynamicDetails.html?openId=${openId}&masterSecret=${masterSecret}&busiId=${dynamicDetailsID}&from=Releasedynamic`)
         }
+       },500)
       
       }else{
+        $.hideLoading()  
         Toast('发布失败')
       }
     },
@@ -235,6 +237,7 @@ function ueryType(){
   });
 }
 function manageimgurl(){
+  $.showLoading('正在提交')
   var formData = new FormData()
              for(var i = 0; i < imgList.length; i++) {           
                 formData.append('file', imgList[i]);
@@ -258,10 +261,12 @@ function manageimgurl(){
       for(var i=0;i<list.length;i++){
         icon.push({ path:list[i].newName})
       }
+      release()
     },
     //调用出错执行的函数
     error: function () {
-
+      $.hideLoading()  
+      Toast('发布失败')
     }
 });
 }
@@ -284,10 +289,6 @@ function jointLabel(){
   });
   from.subTitle=(from.subTitle.substring(from.subTitle.length-1)==',')?from.subTitle.substring(0,from.subTitle.length-1):from.subTitle;
 }
-// 软键盘收起
-$("input").on("blur",function(){
-	window.scroll(0,0);//失焦后强制让页面归位
-});
 // picker时不调起软键盘
 $('#picker').click(function () {
   document.activeElement.blur();

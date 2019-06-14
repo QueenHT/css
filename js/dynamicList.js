@@ -233,7 +233,7 @@ arr.forEach(function(item,index) {
                        <span class="operate_count">0</span>
                    </div>
                    <div>
-                       <span class="iconfont icon-shanchu operate_icon"  onclick="onclick="ZFhandleDelete(${item.newsId},${index},event)""></span>
+                       <span class="iconfont icon-shanchu operate_icon"  onclick="ZFhandleDelete(${item.newsId},${index},event)""></span>
                    </div>
                </div>
            </div>
@@ -461,6 +461,7 @@ function handleDelete(id,i,e){
 * @param {} 帖子索引 
 */
 function ZFhandleDelete(id,i,e){
+    console.log('123')
     e.stopPropagation();
     $.confirm('你确定要删除贴子吗?',function(){  
         $.showLoading('正在删除')

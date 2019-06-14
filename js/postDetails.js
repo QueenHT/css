@@ -1,4 +1,5 @@
 computedScrollHeight();
+
 function computedScrollHeight(){
   var wrapH = $('body').height()- $('.header_wrap').outerHeight()-$('.m-footer').outerHeight()-2;
   $('.m-content').css('height',`${wrapH}px`);
@@ -10,24 +11,11 @@ function computedScrollHeight(){
 var createOper;
 // 创建人id
 var channelId=getQueryVariable('newsId');
-// channelId=358;
 var $input= document.getElementById('commentInp')
-// 点击留言按钮事件
+var communityId;
+// 社区id
 
-$('#commentAfter').focus(function(){
-  console.log(123)
-  $('.m-footer').css('display','none')
-  $('.comment-input-div').css('display','block')
-  $('.comment-input-div').focus();
-})
-function getBackHref(){
-  var from = getQueryVariable('from')
-  if(from){
-    goBackfn()
-  }else{
-    window.history.go(-1)  
-  }
-}
+
 //获取动态内容
 $(function(){
     $.ajax({
@@ -49,6 +37,8 @@ $(function(){
            
         },
         success: function (data) {
+          // 社区id
+          communityId=data.obj.channelId
             // 创建人id
             createOper=data.obj.createOper
         //   发帖人昵称
@@ -126,14 +116,11 @@ $(function(){
                 <img src="${IMGAPI+item.headPic}" onerror="this.src='../img/dbm_images/logo.png'" alt="">
             </div>
             <div class="g-pl-content-div">
-                <div class="g-pl-name-div">
-                    <p>
-                            <span class="g-pl-name">${item.nickName} :</span>
-                            <span class="g-pl-content">
-                                   ${item.content}
-                            </span>
-                    </p>
-                   
+                <div class="g-pl-name-div">                 
+                            <div class="g-pl-name">${item.nickName} :</div>
+                            <div class="g-pl-content">                        
+                                   ${item.content}                    
+                            </div>                       
                 </div>
               
            
@@ -159,8 +146,23 @@ $('#discomment').click(function(){
   $('.m-footer').css('display','flex')
   $('#commentAfter').val($('#comment').val())
 })
-// 留言按钮点击事件 
-
+// 点击留言输入框事件
+$('#commentAfter').focus(function(){
+  $('.m-footer').css('display','none')
+  $('.comment-input-div').css('display','block')
+  $('#commentAfter').blur()
+  $('.comment-input-div').focus();
+})
+// 点击留言框以外的区域时 关闭留言框区域
+$('.m-content').click(function(){
+  if($('.comment-input-div').css('display')=='block'){
+    $('.comment-input-div').css('display','none')
+    $('.m-footer').css('display','flex')
+    $('#commentAfter').blur()
+    $('#commentAfter').val($('#comment').val())
+  }
+})
+// 输入完成后留言按钮点击事件
 $('#commentBtn').click(function(){
   var commentContent=$("#comment").val()
     if(commentContent.length==0){
@@ -322,14 +324,7 @@ function  dislikeAjax(){
     }
 });
 }
-// 点击留言框以外的区域时 关闭留言框区域
-$('.m-content').click(function(){
-  if($('.comment-input-div').css('display')=='block'){
-    $('.comment-input-div').css('display','none')
-    $('.m-footer').css('display','flex')
-    $('#commentAfter').val($('#comment').val())
-  }
-})
+
 // 日期转时间戳
 function transdate(endTime){
   var date = new Date();
@@ -415,7 +410,25 @@ function delFavorite(){
     }
 });
 }
-// 软键盘收起
-$("input").on("blur",function(){
-	window.scroll(0,0);//失焦后强制让页面归位
-});
+// 进入社区按钮
+function intheCommunity(){
+  // communityInfo
+  if (checkSystem()) {
+    window.location.href = `./communityInfo.html?openId=${openId}&masterSecret=${masterSecret}&channelId=${communityId}`
+  } else {
+    data_href(`./communityInfo.html?openId=${openId}&masterSecret=${masterSecret}&channelId=${communityId}`)
+  }
+}
+// 返回按钮
+function getBackHref(){
+  var from = getQueryVariable('from')
+  var h5from = getQueryVariable('h5from')
+
+  if(from){
+    goBackfn()
+  }else if(h5from){
+    h5backurl('allCommunity')
+  }else{
+    window.history.go(-1)  
+  }
+}
